@@ -26,9 +26,7 @@ fun ButtonComponent(text:String) {
         Text(
             text = text,
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
         )
     }
 }
