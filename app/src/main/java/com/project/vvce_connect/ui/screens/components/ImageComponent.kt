@@ -1,4 +1,4 @@
-package com.project.vvce_connect.ui.screens.registration.components
+package com.project.vvce_connect.ui.screens.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
