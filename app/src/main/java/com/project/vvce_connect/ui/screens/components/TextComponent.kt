@@ -1,4 +1,4 @@
-package com.project.vvce_connect.ui.screens.registration.components
+package com.project.vvce_connect.ui.screens.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
