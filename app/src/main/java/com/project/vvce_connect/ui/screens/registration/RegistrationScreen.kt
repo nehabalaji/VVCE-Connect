@@ -39,7 +39,7 @@ class RegistrationScreen {
         }
     }
 
-    @Preview
+    @Preview(showBackground = true)
     @Composable
     fun RegistrationScreenPreview() {
         RegistrationScreen()
