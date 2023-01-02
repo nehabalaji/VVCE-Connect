@@ -27,11 +27,8 @@ fun SplashScreen() {
             targetValue = 0.6f,
             animationSpec = tween(
                 durationMillis = 800
-
             )
-
         )
-        delay(1000)
     }
     Box(
         modifier = Modifier
