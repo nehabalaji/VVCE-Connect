@@ -1,5 +1,6 @@
 package com.project.vvce_connect.ui.screens.splash
 
+import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -26,9 +27,13 @@ fun SplashScreen() {
         scale.animateTo(
             targetValue = 0.6f,
             animationSpec = tween(
-                durationMillis = 800
+                durationMillis = 800,
+                easing = {
+                    OvershootInterpolator(2f).getInterpolation(it)
+                }
             )
         )
+        delay(2000)
     }
     Box(
         modifier = Modifier
