@@ -26,4 +26,43 @@ object StudentNavData {
         )
         return bottomNavItemList
     }
+
+    fun getFeatureGridItems():List<StudentNavDetails>{
+        val featureGridItemList = listOf<StudentNavDetails>(
+            StudentNavDetails(
+                name = "Attendance",
+                icon = Icons.Filled.Rule
+            ),
+            StudentNavDetails(
+                name = "Performance Report",
+                icon = Icons.Filled.ChromeReaderMode
+            ),
+            StudentNavDetails(
+                name = "Course Work",
+                icon = Icons.Filled.Book
+            ),
+            StudentNavDetails(
+                name = "Time Table",
+                icon = Icons.Filled.CalendarMonth
+            ),
+            StudentNavDetails(
+                name = "Placements",
+                icon = Icons.Filled.SupervisedUserCircle
+            ),
+            StudentNavDetails(
+                name = "Exam Form",
+                icon = Icons.Filled.Description
+            ),
+            StudentNavDetails(
+                name = "Exam Fee",
+                icon = Icons.Filled.Payments
+            ),
+            StudentNavDetails(
+                name = "Feedback",
+                icon = Icons.Filled.RateReview
+            )
+        )
+
+        return featureGridItemList
+    }
 }
