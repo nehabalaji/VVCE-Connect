@@ -10,12 +10,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.vvce_connect.ui.screens.student.StudentNavData
-import com.project.vvce_connect.ui.screens.student.StudentNavDetails
+import com.project.vvce_connect.ui.screens.localdata.DashboardNavData
+import com.project.vvce_connect.ui.screens.localdata.DashboardNavDetails
 
 @Composable
 fun BottomNavigationBar(
-    items: List<StudentNavDetails>,
+    items: List<DashboardNavDetails>,
     modifier: Modifier,
 ) {
     BottomNavigation(
@@ -49,5 +49,5 @@ fun BottomNavigationBar(
 @Preview(showBackground = true)
 @Composable
 fun BottomNavigationBarPreview() {
-    BottomNavigationBar(items = StudentNavData.getBottomNavItems(), modifier = Modifier)
+    BottomNavigationBar(items = DashboardNavData.getBottomNavItems(), modifier = Modifier)
 }
