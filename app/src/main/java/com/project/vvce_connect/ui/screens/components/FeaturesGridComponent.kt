@@ -9,13 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.project.vvce_connect.ui.screens.student.StudentNavData
-import com.project.vvce_connect.ui.screens.student.StudentNavDetails
+import com.project.vvce_connect.ui.screens.localdata.DashboardNavData
+import com.project.vvce_connect.ui.screens.localdata.DashboardNavDetails
 
 @Composable
 fun FeaturesGridComponent(
     gridSize: Int,
-    items: List<StudentNavDetails>,
+    items: List<DashboardNavDetails>,
     modifier: Modifier
 ) {
     LazyVerticalGrid(
@@ -34,5 +34,5 @@ fun FeaturesGridComponent(
 @Preview(showBackground = true)
 @Composable
 fun FeaturesGridComponentPreview() {
-    FeaturesGridComponent(gridSize = 2, items = StudentNavData.getFeatureGridItems(), modifier = Modifier)
+    FeaturesGridComponent(gridSize = 2, items = DashboardNavData.getStudentDashboardItems(), modifier = Modifier)
 }

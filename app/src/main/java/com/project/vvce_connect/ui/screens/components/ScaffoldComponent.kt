@@ -2,13 +2,11 @@ package com.project.vvce_connect.ui.screens.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.project.vvce_connect.ui.screens.student.StudentNavData
+import com.project.vvce_connect.ui.screens.localdata.DashboardNavData
 
 @Composable
 fun ScaffoldComponent(
@@ -18,15 +16,15 @@ fun ScaffoldComponent(
     bottomBar: @Composable () -> Unit = {}
 ) {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
-    var pad:PaddingValues ?= null
+    var pad: PaddingValues ? = null
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = {
-            topBar()
-        },
         backgroundColor = MaterialTheme.colors.secondary,
         content = { padding ->
-                  content()
+            Column() {
+                topBar()
+                content()
+            }
             pad = padding
         },
         bottomBar = {
@@ -40,22 +38,20 @@ fun ScaffoldComponent(
 fun ScaffoldComponentPreview() {
     ScaffoldComponent(
         modifier = Modifier,
-        topBar = {
+        content = {
             TopAppBarComponent(
                 modifier = Modifier,
                 title = "Hi Neha"
             )
-        },
-        content = {
             FeaturesGridComponent(
                 gridSize = 2,
-                items = StudentNavData.getFeatureGridItems(),
+                items = DashboardNavData.getStudentDashboardItems(),
                 modifier = Modifier
             )
         },
         bottomBar = {
             BottomNavigationBar(
-                items = StudentNavData.getBottomNavItems(),
+                items = DashboardNavData.getBottomNavItems(),
                 modifier = Modifier
             )
         }

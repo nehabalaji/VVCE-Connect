@@ -1,8 +1,8 @@
-package com.project.vvce_connect.ui.screens.student
+package com.project.vvce_connect.ui.screens.localdata
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class StudentNavDetails(
+data class DashboardNavDetails(
     val name: String,
     val icon: ImageVector
 )
