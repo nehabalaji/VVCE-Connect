@@ -1,4 +1,4 @@
-package com.project.vvce_connect.ui.screens.splash
+package com.example.authentication.ui.screens.splash
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -12,10 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.project.vvce_connect.R
-import com.project.vvce_connect.ui.screens.components.ImageComponent
+import com.example.authentication.R
+import com.example.authentication.ui.components.ImageComponent
 import com.project.vvce_connect.ui.theme.splash_bg
-import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen() {

@@ -7,8 +7,9 @@ import com.project.navigator.ComposeNavigator
 import com.project.navigator.asFlow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class VvceConnectComposeNavigator : ComposeNavigator() {
+class VvceConnectComposeNavigator @Inject constructor() : ComposeNavigator() {
     override fun navigate(route: String, optionsBuilder: (NavOptionsBuilder.() -> Unit)?) {
         val options = optionsBuilder?.let { navOptions(it) }
         navigationCommands.tryEmit(ComposeNavigationCommand.NavigateToRoute(route, options))

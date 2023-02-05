@@ -1,4 +1,4 @@
-package com.project.vvce_connect.ui.screens.registration
+package com.example.authentication.ui.registration
 
 import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
 import androidx.compose.foundation.rememberScrollState
@@ -12,8 +12,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.project.vvce_connect.R
-import com.project.vvce_connect.ui.screens.components.* // ktlint-disable no-wildcard-imports
+import com.example.authentication.ui.components.*
+import com.example.authentication.R
 
 @Composable
 fun RegistrationScreen() {

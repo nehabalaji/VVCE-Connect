@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class NavigationModule {
 
-    @Binds
     @Singleton
-    abstract fun provideComposeNavigator(whatsappCloneComposeNavigator: VvceConnectComposeNavigator): ComposeNavigator
+    @Binds
+    abstract fun provideComposeNavigator(composeNavigator: VvceConnectComposeNavigator): ComposeNavigator
 }
