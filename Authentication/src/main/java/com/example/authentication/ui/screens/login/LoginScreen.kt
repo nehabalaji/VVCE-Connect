@@ -1,4 +1,4 @@
-package com.project.vvce_connect.ui.screens.login
+package com.example.authentication.ui.screens.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -9,9 +9,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.authentication.R
 import androidx.compose.ui.unit.dp
-import com.project.vvce_connect.R
-import com.project.vvce_connect.ui.screens.components.*
+import com.example.authentication.ui.components.*
 
 @Composable
 fun LoginScreen() {
