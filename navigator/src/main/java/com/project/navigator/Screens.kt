@@ -6,7 +6,7 @@ sealed class Screens(
     val route: String,
     val navArguments: List<NamedNavArgument> = emptyList()
 ) {
-    val name: String = route.appendArguments(navArguments)
+    var name: String = route.appendArguments(navArguments)
 
     // onboarding
     object VvceConnectSplashScreen : Screens("splashScreen")
