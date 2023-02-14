@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.runtime.Composable
@@ -13,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.project.vvce_connect.ui.screens.components.BoxInBox
 import com.project.vvce_connect.ui.screens.components.CardAttendance
+import com.project.vvce_connect.ui.screens.components.DisplayNumberBox
 
 @Composable
 fun AttendanceScreen(modifier: Modifier) {
@@ -37,17 +36,7 @@ fun AttendanceScreen(modifier: Modifier) {
                 modifier = modifier.size(248.dp)
             )
         }
-        Box(
-            modifier = modifier
-                .padding(top = 16.dp)
-                .fillMaxWidth()
-        ) {
-            Row(modifier = modifier.padding(16.dp)) {
-                Text(text = "Total Working Days", fontSize = 24.sp)
-                Spacer(modifier = modifier.padding(end = 48.dp, start = 48.dp))
-                Text(text = "24", fontSize = 24.sp)
-            }
-        }
+        DisplayNumberBox(modifier = modifier, title = "Total Working Days", number = "24", color = Color.Unspecified)
         Row(modifier = modifier.fillMaxWidth().padding(24.dp)) {
             CardAttendance(modifier = Modifier, type = "Present", attendance = "03", color = Color.Green)
             CardAttendance(modifier = Modifier, type = "Absent", attendance = "20", color = Color.Red)
