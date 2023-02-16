@@ -1,117 +1,296 @@
 package com.project.vvce_connect.ui.screens.guest.contactUs
 
-import android.net.Uri
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
-import com.project.vvce_connect.R
-import androidx.activity.compose.rememberLauncherForActivityResult as rememberLauncherForActivityResult
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.project.vvce_connect.ui.screens.components.ButtonComponent
+import com.project.vvce_connect.ui.screens.components.TextComponent
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ContactUs(){
-    var name by rememberSaveable{ mutableStateOf("default name") }
-    var usn by rememberSaveable{ mutableStateOf("default usn") }
-    var section by rememberSaveable{ mutableStateOf("default section") }
-    var semester by rememberSaveable{ mutableStateOf("default semester") }
-    var department by rememberSaveable{ mutableStateOf("default department") }
-    var mentor by rememberSaveable{ mutableStateOf("default mentor") }
-    Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(8.dp)) {
-
-        ContactImage()
-
-        Row(modifier = Modifier.padding(8.dp).fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Name", modifier = Modifier.width(100.dp))
-            TextField(value = name, onValueChange = {name = it}, colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                textColor = Color.Black
-            ))
-        }
-
-        Row(modifier = Modifier.padding(8.dp).fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "USN", modifier = Modifier.width(100.dp))
-            TextField(value = usn, onValueChange = {usn = it}, colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                textColor = Color.Black
-            ))
-        }
-
-        Row(modifier = Modifier.padding(8.dp).fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Section", modifier = Modifier.width(100.dp))
-            TextField(value = section, onValueChange = {section = it}, colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                textColor = Color.Black
-            ))
-        }
-
-        Row(modifier = Modifier.padding(8.dp).fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Semester", modifier = Modifier.width(100.dp))
-            TextField(value = semester , onValueChange = { semester = it}, colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                textColor = Color.Black
-            ))
-        }
-
-        Row(modifier = Modifier.padding(8.dp).fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Department", modifier = Modifier.width(100.dp))
-            TextField(value = department , onValueChange = { department = it}, colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                textColor = Color.Black
-            ))
-        }
-
-        Row(modifier = Modifier.padding(8.dp).fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Mentor", modifier = Modifier.width(100.dp))
-            TextField(value = mentor , onValueChange = { mentor = it}, colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                textColor = Color.Black
-            ))
-        }
-
-        ButtonComponent(text = "SignOut")
-
-    }
-}
-
-@Composable
-fun ContactImage() {
-    val imageUri = rememberSaveable { mutableStateOf("") }
-    val painter = rememberImagePainter(
-        imageUri.value.ifEmpty { R.drawable.user }
-    )
-
-    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { imageUri.value = it.toString() }
-    }
-
-
+fun ContactUsScreen() {
     Column(
-        modifier = Modifier.padding(8.dp).fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(8.dp)
     ) {
-        Card(shape = CircleShape, modifier = Modifier.padding(8.dp).size(100.dp)) {
-            Image(
-                painter = painter,
-                contentDescription = null,
-                modifier = Modifier.wrapContentSize().clickable { launcher.launch("image/*") },
-                contentScale = ContentScale.Crop
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .background(Color(0x00E5FF))
+        ) {
+            TextComponent(
+                text = "Contact Us",
+                modifier = Modifier.width(100.dp),
+                style = TextStyle(color = Color.Black)
             )
         }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            TextComponent(
+                text = "Courses",
+                modifier = Modifier,
+                style = TextStyle(color = Color.Black)
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+
+            val contextForToast = LocalContext.current.applicationContext
+
+            val listItems = arrayOf("BE/B.Tech", "M.Tech", "MBA")
+
+            var selectedItem by remember {
+                mutableStateOf(listItems[0])
+            }
+
+            var expanded by remember {
+                mutableStateOf(false)
+            }
+
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                }
+            ) {
+
+                TextField(
+                    value = selectedItem,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text(text = "Courses") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = expanded
+                        )
+                    },
+                    colors = ExposedDropdownMenuDefaults.textFieldColors()
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    listItems.forEach { selectedOption ->
+
+                        DropdownMenuItem(onClick = {
+                            selectedItem = selectedOption
+                            Toast.makeText(contextForToast, selectedOption, Toast.LENGTH_SHORT)
+                                .show()
+                            expanded = false
+                        }) {
+                            Text(text = selectedOption)
+                        }
+                    }
+                }
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            val textValue = remember {
+                mutableStateOf("")
+            }
+            OutlinedTextField(
+                value = textValue.value,
+                onValueChange = { textValue.value = it },
+                label = { Text(text = "Name") }
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            val textValue = remember {
+                mutableStateOf("")
+            }
+            OutlinedTextField(
+                value = textValue.value,
+                onValueChange = { textValue.value = it },
+                label = { Text(text = "Phone number") }
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            val textValue = remember {
+                mutableStateOf("")
+            }
+            OutlinedTextField(
+                value = textValue.value,
+                onValueChange = { textValue.value = it },
+                label = { Text(text = "Email") }
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            TextComponent(
+                text = "Interested Branch",
+                modifier = Modifier,
+                style = TextStyle(color = Color.Black)
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+
+            val contextForToast = LocalContext.current.applicationContext
+
+            val listItems = arrayOf(
+                "Computer Science and Engineering",
+                "Information Science and Engineering",
+                "Electronics and Communication Engineering",
+                "Electrical and Electronics Engineering",
+                "Mechanical Engineering",
+                "Civil Engineering"
+            )
+
+            var selectedItem by remember {
+                mutableStateOf(listItems[0])
+            }
+
+            var expanded by remember {
+                mutableStateOf(false)
+            }
+
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                }
+            ) {
+
+                TextField(
+                    value = selectedItem,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text(text = "Courses") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = expanded
+                        )
+                    },
+                    colors = ExposedDropdownMenuDefaults.textFieldColors()
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    listItems.forEach { selectedOption ->
+
+                        DropdownMenuItem(onClick = {
+                            selectedItem = selectedOption
+                            Toast.makeText(contextForToast, selectedOption, Toast.LENGTH_SHORT)
+                                .show()
+                            expanded = false
+                        }) {
+                            Text(text = selectedOption)
+                        }
+                    }
+                }
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            TextComponent(
+                text = "Entrance Examination Taken",
+                modifier = Modifier,
+                style = TextStyle(color = Color.Black)
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+
+            val examList: List<String> = listOf("K-CET", "Comedk", "JEE", "Other")
+
+            val contextForToast = LocalContext.current.applicationContext
+
+            Column(horizontalAlignment = Alignment.Start) {
+
+                examList.forEach { examName ->
+
+                    var checked by remember {
+                        mutableStateOf(true)
+                    }
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(
+                            checked = checked,
+                            onCheckedChange = { checked_ ->
+                                checked = checked_
+                                Toast.makeText(
+                                    contextForToast,
+                                    "$examName $checked_",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
+                        )
+
+                        Text(
+                            modifier = Modifier.padding(start = 2.dp),
+                            text = examName
+                        )
+                    }
+                }
+            }
+        }
+
+        ButtonComponent(text = "Submit")
+
     }
 }
+
+@Preview
+@Composable
+fun ContactUsScreenPreview() {
+    ContactUsScreen()
+}
+
 
