@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.project.vvce_connect.ui.screens.localdata.DashboardNavData
 
@@ -19,7 +20,7 @@ fun ScaffoldComponent(
     var pad: PaddingValues ? = null
     Scaffold(
         scaffoldState = scaffoldState,
-        backgroundColor = MaterialTheme.colors.secondary,
+        backgroundColor = Color.White,
         content = { padding ->
             Column() {
                 topBar()

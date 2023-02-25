@@ -20,14 +20,14 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun CardComponent(modifier: Modifier, icon: ImageVector, name: String) {
     Card(
-        modifier = modifier.padding(vertical = 10.dp),
+        modifier = modifier
+            .padding(10.dp)
+            .height(148.dp),
         elevation = 10.dp,
         backgroundColor = MaterialTheme.colors.background,
     ) {
         Column(
-            modifier = modifier
-                .padding(10.dp)
-                .height(148.dp),
+            modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
