@@ -1,6 +1,8 @@
 package com.project.vvce_connect.ui.screens.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -22,16 +24,18 @@ fun CardComponent(modifier: Modifier, icon: ImageVector, name: String) {
     Card(
         modifier = modifier
             .padding(10.dp)
-            .height(148.dp),
+            .height(148.dp)
+            .verticalScroll(rememberScrollState()),
         elevation = 10.dp,
-        backgroundColor = MaterialTheme.colors.background,
+        backgroundColor = MaterialTheme.colors.background
     ) {
         Column(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(imageVector = icon,
+            Icon(
+                imageVector = icon,
                 contentDescription = "Icon",
                 modifier = modifier.size(48.dp)
             )

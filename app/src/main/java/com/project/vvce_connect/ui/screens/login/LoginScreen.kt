@@ -22,7 +22,7 @@ fun LoginScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "VVCE logo")
+        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "VVCE logo", modifier = Modifier)
         Spacer(modifier = Modifier.padding(16.dp))
         TextComponent(text = "Login", modifier = Modifier, style = TextStyle(fontSize = MaterialTheme.typography.h3.fontSize, fontWeight = FontWeight.Bold))
         Spacer(modifier = Modifier.padding(20.dp))

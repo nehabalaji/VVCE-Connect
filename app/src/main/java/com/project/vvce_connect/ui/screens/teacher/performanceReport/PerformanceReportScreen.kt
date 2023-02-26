@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.project.vvce_connect.ui.screens.components.BoxInBox
 import com.project.vvce_connect.ui.screens.components.DisplayNumberBox
+import com.project.vvce_connect.ui.screens.components.IconImageComponent
 
 @Composable
 fun PerformanceReportScreen(modifier: Modifier) {
@@ -29,15 +30,15 @@ fun PerformanceReportScreen(modifier: Modifier) {
                 .height(300.dp)
                 .align(Alignment.CenterHorizontally)
         ) {
-            Image(
-                imageVector = Icons.Filled.BarChart,
-                contentDescription = "Pie",
-                modifier = modifier.size(248.dp)
+            IconImageComponent(
+                modifier = Modifier.size(248.dp),
+                image = Icons.Filled.BarChart,
+                content = "Bar Chart"
             )
         }
-        DisplayNumberBox(modifier = modifier, title = "CIE 1                   ", number = "25", color = Color.LightGray)
-        DisplayNumberBox(modifier = modifier, title = "CIE 2                   ", number = "21", color = Color.LightGray)
-        DisplayNumberBox(modifier = modifier, title = "CIE 3                   ", number = "28", color = Color.LightGray)
+        DisplayNumberBox(modifier = modifier, title = "CIE 1", number = "25", color = Color.LightGray)
+        DisplayNumberBox(modifier = modifier, title = "CIE 2", number = "21", color = Color.LightGray)
+        DisplayNumberBox(modifier = modifier, title = "CIE 3", number = "28", color = Color.LightGray)
     }
 }
 

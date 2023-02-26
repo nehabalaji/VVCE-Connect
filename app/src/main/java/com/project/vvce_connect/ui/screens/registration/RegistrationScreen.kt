@@ -25,7 +25,7 @@ fun RegistrationScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), "Logo of VVCE")
+        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), "Logo of VVCE", modifier = Modifier)
         TextComponent("Registration", modifier = Modifier, style = TextStyle(fontSize = MaterialTheme.typography.h3.fontSize, fontWeight = FontWeight.Bold))
         Spacer(modifier = Modifier.padding(20.dp))
         TextFieldComponent("Enter USN")

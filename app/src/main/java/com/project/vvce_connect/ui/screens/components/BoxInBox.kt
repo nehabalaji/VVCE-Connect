@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun BoxInBox(modifier: Modifier,text:String,subject:String) {
+fun BoxInBox(modifier: Modifier, text: String, subject: String) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -32,11 +33,14 @@ fun BoxInBox(modifier: Modifier,text:String,subject:String) {
                 .background(color = MaterialTheme.colors.secondary),
             contentAlignment = Alignment.Center
         ) {
-            Text(
+            TextComponent(
                 text = text,
-                textAlign = TextAlign.Center,
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold
+                modifier = Modifier,
+                style = TextStyle(
+                    fontSize = 36.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
             )
         }
         Box(
@@ -51,17 +55,16 @@ fun BoxInBox(modifier: Modifier,text:String,subject:String) {
             contentAlignment = Alignment.Center
         ) {
             Row(modifier = modifier.clip(RoundedCornerShape(50))) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.ArrowLeft, contentDescription = "Arrow Left")
-                }
-                Text(
-                    fontSize = 18.sp,
+                IconButtonComponent(icon = Icons.Filled.ArrowLeft, content = "Left Arrow")
+                TextComponent(
                     text = subject,
-                    textAlign = TextAlign.Center
+                    modifier = Modifier,
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Center
+                    )
                 )
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.ArrowRight, contentDescription = "Arrow Right")
-                }
+                IconButtonComponent(icon = Icons.Filled.ArrowRight, content = "Right Arrow")
             }
         }
     }

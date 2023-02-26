@@ -1,6 +1,5 @@
 package com.project.vvce_connect.ui.screens.student.attendance
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -15,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.project.vvce_connect.ui.screens.components.BoxInBox
 import com.project.vvce_connect.ui.screens.components.CardAttendance
 import com.project.vvce_connect.ui.screens.components.DisplayNumberBox
+import com.project.vvce_connect.ui.screens.components.IconImageComponent
 
 @Composable
 fun AttendanceScreen(modifier: Modifier) {
@@ -30,10 +30,10 @@ fun AttendanceScreen(modifier: Modifier) {
                 .height(300.dp)
                 .align(Alignment.CenterHorizontally)
         ) {
-            Image(
-                imageVector = Icons.Filled.PieChart,
-                contentDescription = "Pie",
-                modifier = modifier.size(248.dp)
+            IconImageComponent(
+                modifier = Modifier.size(248.dp),
+                image = Icons.Filled.PieChart,
+                content = "Pie Chart"
             )
         }
         DisplayNumberBox(modifier = modifier, title = "Total Working Days", number = "24", color = Color.Unspecified)

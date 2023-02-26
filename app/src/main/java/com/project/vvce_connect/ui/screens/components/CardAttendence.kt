@@ -2,11 +2,13 @@ package com.project.vvce_connect.ui.screens.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,9 +25,9 @@ fun CardAttendance(modifier: Modifier, type: String, attendance: String, color: 
         backgroundColor = color
     ) {
         Column() {
-            Text(text = type, textAlign = TextAlign.Center, fontSize = 36.sp)
+            TextComponent(text = type, modifier = Modifier, style = TextStyle(fontSize = 36.sp, textAlign = TextAlign.Center))
             Spacer(modifier = modifier.padding(24.dp))
-            Text(text = attendance, textAlign = TextAlign.End, fontSize = 48.sp, style = TextStyle(color = Color.White))
+            TextComponent(text = attendance, modifier = Modifier, style = TextStyle(fontSize = 48.sp, color = Color.White))
         }
     }
 }

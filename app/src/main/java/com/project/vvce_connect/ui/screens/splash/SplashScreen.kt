@@ -36,7 +36,7 @@ fun SplashScreen() {
             .background(splash_bg),
         contentAlignment = Alignment.Center
     ) {
-        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "Logo")
+        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "Logo", modifier = Modifier)
     }
 }
 
