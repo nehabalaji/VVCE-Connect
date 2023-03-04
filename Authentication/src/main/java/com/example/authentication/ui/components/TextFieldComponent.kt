@@ -1,5 +1,6 @@
 package com.example.authentication.ui.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -13,7 +14,8 @@ import androidx.compose.ui.unit.dp
 fun TextFieldComponent(
     label: String,
     modifier: Modifier = Modifier
-        .padding(horizontal = 8.dp, vertical = 4.dp)
+        .fillMaxWidth()
+        .padding(start = 8.dp, end = 8.dp),
 ) {
     var text by rememberSaveable() {
         mutableStateOf("")
@@ -21,7 +23,8 @@ fun TextFieldComponent(
     OutlinedTextField(
         value = text,
         onValueChange = { text = it },
-        label = { Text(label) }
+        label = { Text(label) },
+        modifier = modifier
     )
 }
 

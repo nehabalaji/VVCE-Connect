@@ -1,5 +1,6 @@
 package com.example.authentication.ui.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -22,7 +23,8 @@ import androidx.compose.ui.unit.dp
 fun PasswordFieldComponent(
     label: String,
     modifier: Modifier = Modifier
-        .padding(horizontal = 8.dp, vertical = 4.dp)
+        .fillMaxWidth()
+        .padding(start = 8.dp, end = 8.dp)
 ) {
     var password by rememberSaveable() {
         mutableStateOf("")
@@ -54,7 +56,8 @@ fun PasswordFieldComponent(
             }) {
                 Icon(imageVector = image, contentDescription = description)
             }
-        }
+        },
+        modifier = modifier
     )
 }
 
