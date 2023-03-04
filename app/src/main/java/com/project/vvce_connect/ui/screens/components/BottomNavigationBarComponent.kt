@@ -16,7 +16,7 @@ import com.project.vvce_connect.ui.screens.localdata.DashboardNavDetails
 @Composable
 fun BottomNavigationBar(
     items: List<DashboardNavDetails>,
-    modifier: Modifier,
+    modifier: Modifier
 ) {
     BottomNavigation(
         modifier = modifier,
@@ -26,7 +26,7 @@ fun BottomNavigationBar(
         items.forEach { item ->
             BottomNavigationItem(
                 selected = false,
-                onClick = {  },
+                onClick = { },
                 icon = {
                     Column(horizontalAlignment = CenterHorizontally) {
                         Icon(
