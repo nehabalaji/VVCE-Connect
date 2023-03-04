@@ -1,4 +1,4 @@
-package com.project.vvce_connect.ui.theme
+package com.example.authentication.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

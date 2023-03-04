@@ -10,14 +10,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.authentication.R
 import com.example.authentication.ui.components.ImageComponent
-import com.project.vvce_connect.ui.theme.splash_bg
+import com.example.authentication.ui.theme.splash_bg
+import com.project.navigator.Screens
+import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavController) {
     val scale = remember {
         Animatable(0f)
     }
@@ -28,19 +32,25 @@ fun SplashScreen() {
                 durationMillis = 800
             )
         )
+        delay(1000)
+        navController.navigate(Screens.RegistrationScreen.route) {
+            popUpTo(Screens.VvceConnectSplashScreen.route) {
+                inclusive = true
+            }
+        }
     }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(splash_bg),
+            .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
         ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "Logo")
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun SplashScreenPreview() {
-    SplashScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun SplashScreenPreview() {
+//    SplashScreen()
+//}
