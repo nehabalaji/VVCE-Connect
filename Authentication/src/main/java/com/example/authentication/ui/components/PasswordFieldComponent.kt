@@ -24,7 +24,8 @@ fun PasswordFieldComponent(
     label: String,
     modifier: Modifier = Modifier
         .fillMaxWidth()
-        .padding(start = 8.dp, end = 8.dp)
+        .padding(start = 8.dp, end = 8.dp),
+    onValueChanged: (String) -> Unit = {}
 ) {
     var password by rememberSaveable() {
         mutableStateOf("")
@@ -34,7 +35,10 @@ fun PasswordFieldComponent(
     }
     OutlinedTextField(
         value = password,
-        onValueChange = { password = it },
+        onValueChange = {
+            password = it
+            onValueChanged(it)
+        },
         label = { Text(text = label) },
         singleLine = true,
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),

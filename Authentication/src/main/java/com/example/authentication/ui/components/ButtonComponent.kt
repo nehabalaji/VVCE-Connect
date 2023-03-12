@@ -12,9 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ButtonComponent(text: String) {
+fun ButtonComponent(text: String, onClick: () -> Unit = {}) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 8.dp, end = 8.dp),

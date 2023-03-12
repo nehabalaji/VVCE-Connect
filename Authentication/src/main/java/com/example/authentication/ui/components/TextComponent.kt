@@ -11,10 +11,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TextComponent(text: String, modifier: Modifier, style: TextStyle) {
+fun TextComponent(
+    text: String,
+    modifier: Modifier = Modifier.padding(vertical = 8.dp),
+    style: TextStyle
+) {
     Text(
         text = text,
-        modifier.padding(vertical = 8.dp),
+        modifier,
         style = style
     )
 }

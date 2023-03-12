@@ -15,6 +15,7 @@ sealed class Screens(
     object RegistrationScreen : Screens("registrationScreen")
     object LoginScreen : Screens("loginScreen")
     object ForgotPasswordScreen : Screens("forgotPassword")
+    object EmailVerificationScreen : Screens("emailVerificationScreen")
 }
 
 sealed class Routes(val name: String) {
