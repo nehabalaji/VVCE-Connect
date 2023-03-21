@@ -1,5 +1,6 @@
 package com.project.data.repository
 
+import com.project.data.mappers.toDStudent
 import com.project.data.mappers.toStudent
 import com.project.data.sources.local.Dao
 import com.project.domain.models.Student
@@ -12,5 +13,9 @@ class StudentRepositoryImpl @Inject constructor(
 
     override suspend fun getStudent(studentUsn: String): Student {
         return dao.getStudent(studentUsn).toStudent()
+    }
+
+    override suspend fun insertStudent(student: Student) {
+        dao.insertStudent(student.toDStudent())
     }
 }

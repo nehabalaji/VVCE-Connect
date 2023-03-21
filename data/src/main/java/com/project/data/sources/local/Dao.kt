@@ -1,6 +1,7 @@
 package com.project.data.sources.local
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.project.data.model.DStudent
 
@@ -9,4 +10,7 @@ interface Dao {
 
     @Query("SELECT * FROM DStudent WHERE usn=:usn")
     fun getStudent(usn: String): DStudent
+
+    @Insert
+    fun insertStudent(student: DStudent)
 }
