@@ -1,28 +1,36 @@
 package com.example.authentication.nav
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import com.example.authentication.ui.screens.registration.RegistrationScreen
+import com.example.authentication.ui.screens.EmailVerificationScreen
 import com.example.authentication.ui.screens.login.LoginScreen
+import com.example.authentication.ui.screens.registration.RegistrationScreen
 import com.example.authentication.ui.screens.splash.SplashScreen
+import com.project.navigator.ComposeNavigator
 import com.project.navigator.Routes
 import com.project.navigator.Screens
 
-fun NavGraphBuilder.authNavGraph(navController: NavController) {
+fun NavGraphBuilder.authNavGraph(composeNavigator: ComposeNavigator) {
     navigation(
-        startDestination = Screens.VvceConnectSplashScreen.route,
+        startDestination = Screens.VvceConnectSplashScreen.name,
         route = Routes.Auth.name
     ) {
-        composable(Screens.VvceConnectSplashScreen.route) {
-            SplashScreen(navController)
+        composable(Screens.VvceConnectSplashScreen.name) {
+            SplashScreen(composeNavigator)
         }
-        composable(Screens.LoginScreen.route) {
+        composable(Screens.LoginScreen.name) {
             LoginScreen()
         }
-        composable(Screens.RegistrationScreen.route) {
-            RegistrationScreen(navController)
+        composable(Screens.RegistrationScreen.name) {
+            RegistrationScreen(composeNavigator)
+        }
+        composable(
+            Screens.EmailVerificationScreen.name
+        ) {
+            EmailVerificationScreen(
+                composeNavigator,
+                studentId = it.arguments?.getString("user_id").toString()
+            )
         }
     }
 }

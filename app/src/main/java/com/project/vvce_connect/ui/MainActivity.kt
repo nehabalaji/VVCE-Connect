@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = Routes.Auth.name
                     ) {
-                        authNavGraph(navController)
+                        authNavGraph(composeNavigator)
                     }
                 }
             }

@@ -56,4 +56,28 @@ class RegistrationViewModel @Inject constructor() : ViewModel() {
     fun setConfirmedPassword(inputString: String) {
         confirmPassword = inputString
     }
+
+    fun validateName(): Boolean {
+        return name.isNotBlank()
+    }
+
+    fun validatePhoneNumber(): Boolean {
+        return phoneNumber.length == 10
+    }
+
+    fun validateUsn(): Boolean {
+        return usn.length == 10
+    }
+
+    fun validateEmailId(): Boolean {
+        return email.endsWith("@vvce.ac.in")
+    }
+
+    fun validatePassword(): Boolean {
+        return password.length >= 8
+    }
+
+    fun validateConfirmedPassword(): Boolean {
+        return password == confirmPassword
+    }
 }

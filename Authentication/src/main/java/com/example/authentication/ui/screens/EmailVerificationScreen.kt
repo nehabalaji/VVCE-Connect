@@ -1,5 +1,6 @@
 package com.example.authentication.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,9 +16,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.authentication.R
 import com.example.authentication.ui.theme.Purple500
+import com.project.navigator.ComposeNavigator
 
 @Composable
-fun EmailVerificationScreen() {
+fun EmailVerificationScreen(
+    composeNavigator: ComposeNavigator,
+    studentId: String
+) {
+    Log.v("STUDENT", studentId)
     Column {
         Card(
             modifier = Modifier
@@ -39,6 +45,5 @@ fun EmailVerificationScreen() {
                     .padding(10.dp)
             )
         }
-
     }
 }

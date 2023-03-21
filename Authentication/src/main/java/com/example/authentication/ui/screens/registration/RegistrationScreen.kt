@@ -13,26 +13,48 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.example.authentication.ui.components.*
 import com.example.authentication.ui.screens.registration.viewmodel.RegistrationViewModel
 import com.example.authentication.ui.theme.Purple500
 import com.example.authentication.ui.theme.Purple700
+import com.project.navigator.ComposeNavigator
 import com.project.navigator.Screens
 
 @Composable
 fun RegistrationScreen(
-    navController: NavController
+    navController: ComposeNavigator
 ) {
     val registrationViewModel: RegistrationViewModel = hiltViewModel()
+    val emailError = remember {
+        mutableStateOf(false)
+    }
+    val nameError = remember {
+        mutableStateOf(false)
+    }
+    val phoneError = remember {
+        mutableStateOf(false)
+    }
+    val passwordError = remember {
+        mutableStateOf(false)
+    }
+    val confirmPasswordError = remember {
+        mutableStateOf(false)
+    }
+    val usnError = remember {
+        mutableStateOf(false)
+    }
+
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
@@ -66,28 +88,47 @@ fun RegistrationScreen(
             TextComponent("Sign Up", modifier = Modifier, style = TextStyle(fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Purple700))
             TextFieldComponent("Name", onValueChanged = {
                 registrationViewModel.setName(it)
-            })
+            }, error = nameError.value, errorMessage = "Enter a valid name")
             TextFieldComponent("Phone", onValueChanged = {
                 registrationViewModel.setPhoneNumber(it)
-            })
+            }, error = phoneError.value, errorMessage = "Enter a valid 10 digit phone number")
             TextFieldComponent("USN", onValueChanged = {
                 registrationViewModel.setUsn(it)
-            })
+            }, error = usnError.value, errorMessage = "Enter a valid usn")
             TextFieldComponent("Email id", onValueChanged = {
                 registrationViewModel.setEmail(it)
-            })
+            }, error = emailError.value, errorMessage = "Enter a valid college email id")
             TextFieldComponent("Year of Joining", onValueChanged = {
                 registrationViewModel.setYearOfJoining(it)
             })
             PasswordFieldComponent("Password", onValueChanged = {
                 registrationViewModel.setPassword(it)
-            })
+            }, error = passwordError.value, errorMessage = "Enter a password with 8 or more characters", imeAction = ImeAction.Next)
             PasswordFieldComponent("Confirm Password", onValueChanged = {
                 registrationViewModel.setConfirmedPassword(it)
-            })
+            }, error = confirmPasswordError.value, errorMessage = "Password does not match", imeAction = ImeAction.Done, onActionDone = {
+                    nameError.value = !registrationViewModel.validateName()
+                    phoneError.value = !registrationViewModel.validatePhoneNumber()
+                    usnError.value = !registrationViewModel.validateUsn()
+                    emailError.value = !registrationViewModel.validateEmailId()
+                    passwordError.value = !registrationViewModel.validatePassword()
+                    confirmPasswordError.value = !registrationViewModel.validateConfirmedPassword()
+                    if (!nameError.value && !phoneError.value && !usnError.value && !emailError.value && !passwordError.value && !confirmPasswordError.value) {
+                        navController.navigate(Screens.EmailVerificationScreen.route.plus("/${registrationViewModel.usn}"))
+                    }
+                })
+
             Spacer(modifier = Modifier.padding(10.dp))
             ButtonComponent("REGISTER") {
-                navController.navigate(Screens.EmailVerificationScreen.name)
+                nameError.value = !registrationViewModel.validateName()
+                phoneError.value = !registrationViewModel.validatePhoneNumber()
+                usnError.value = !registrationViewModel.validateUsn()
+                emailError.value = !registrationViewModel.validateEmailId()
+                passwordError.value = !registrationViewModel.validatePassword()
+                confirmPasswordError.value = !registrationViewModel.validateConfirmedPassword()
+                if (!nameError.value && !phoneError.value && !usnError.value && !emailError.value && !passwordError.value && !confirmPasswordError.value) {
+                    navController.navigate(Screens.EmailVerificationScreen.route.plus("/${registrationViewModel.usn}"))
+                }
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -110,9 +151,3 @@ fun RegistrationScreen(
         }
     }
 }
-
-// @Preview(showBackground = true)
-// @Composable
-// fun RegistrationScreenPreview() {
-//    RegistrationScreen()
-// }

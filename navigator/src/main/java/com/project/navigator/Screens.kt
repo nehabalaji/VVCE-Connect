@@ -1,6 +1,8 @@
 package com.project.navigator
 
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 sealed class Screens(
     val route: String,
@@ -15,7 +17,14 @@ sealed class Screens(
     object RegistrationScreen : Screens("registrationScreen")
     object LoginScreen : Screens("loginScreen")
     object ForgotPasswordScreen : Screens("forgotPassword")
-    object EmailVerificationScreen : Screens("emailVerificationScreen")
+    object EmailVerificationScreen : Screens(
+        "emailVerificationScreen",
+        listOf(
+            navArgument("user_id") {
+                type = NavType.StringType
+            }
+        )
+    )
 }
 
 sealed class Routes(val name: String) {

@@ -17,11 +17,12 @@ import androidx.navigation.NavController
 import com.example.authentication.R
 import com.example.authentication.ui.components.ImageComponent
 import com.example.authentication.ui.theme.splash_bg
+import com.project.navigator.ComposeNavigator
 import com.project.navigator.Screens
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(composeNavigator: ComposeNavigator) {
     val scale = remember {
         Animatable(0f)
     }
@@ -33,7 +34,7 @@ fun SplashScreen(navController: NavController) {
             )
         )
         delay(1000)
-        navController.navigate(Screens.RegistrationScreen.route) {
+        composeNavigator.navigate(Screens.RegistrationScreen.route) {
             popUpTo(Screens.VvceConnectSplashScreen.route) {
                 inclusive = true
             }
