@@ -54,7 +54,7 @@ fun BoxInBox(modifier: Modifier, text: String, subject: String) {
                 .clip(RoundedCornerShape(50)),
             contentAlignment = Alignment.Center
         ) {
-            Row(modifier = modifier.clip(RoundedCornerShape(50))) {
+            Row(modifier = modifier.clip(RoundedCornerShape(50)), horizontalArrangement = Arrangement.SpaceBetween) {
                 IconButtonComponent(icon = Icons.Filled.ArrowLeft, content = "Left Arrow")
                 TextComponent(
                     text = subject,
