@@ -11,7 +11,7 @@ class StudentRepositoryImpl @Inject constructor(
     private val dao: Dao
 ) : StudentRepository {
 
-    override suspend fun getStudent(studentUsn: String): Student {
+    override fun getStudent(studentUsn: String): Student {
         return dao.getStudent(studentUsn).toStudent()
     }
 

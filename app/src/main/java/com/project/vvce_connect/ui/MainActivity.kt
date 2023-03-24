@@ -3,7 +3,6 @@ package com.project.vvce_connect.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -11,7 +10,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.example.authentication.nav.authNavGraph
+import com.project.authentication.nav.authNavGraph
 import com.project.navigator.ComposeNavigator
 import com.project.navigator.Routes
 import com.project.vvce_connect.ui.theme.VVCEConnectTheme
@@ -41,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = Routes.Auth.name
                     ) {
-                        authNavGraph(composeNavigator)
+                        authNavGraph(composeNavigator, this@MainActivity)
                     }
                 }
             }

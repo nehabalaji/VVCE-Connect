@@ -25,6 +25,7 @@ sealed class Screens(
             }
         )
     )
+    object StudentDashboardScreen : Screens("studentDashboard")
 }
 
 sealed class Routes(val name: String) {

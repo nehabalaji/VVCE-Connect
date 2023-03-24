@@ -12,5 +12,5 @@ interface Dao {
     fun getStudent(usn: String): DStudent
 
     @Insert
-    fun insertStudent(student: DStudent)
+    suspend fun insertStudent(student: DStudent)
 }

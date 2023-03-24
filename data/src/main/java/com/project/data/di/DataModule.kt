@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.project.data.repository.StudentRepositoryImpl
 import com.project.data.sources.local.Dao
 import com.project.data.sources.local.VvceConnectDatabase
+import com.project.domain.repository.StudentRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +28,5 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideStudentRepository(dao: Dao) = StudentRepositoryImpl(dao)
+    fun provideStudentRepository(dao: Dao): StudentRepository = StudentRepositoryImpl(dao)
 }
