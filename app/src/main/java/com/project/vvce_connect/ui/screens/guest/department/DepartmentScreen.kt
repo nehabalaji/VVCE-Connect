@@ -27,7 +27,7 @@ fun DepartmentScreen(
     }
 }
 
-@Preview
+@Preview (showBackground = true)
 @Composable
 fun DepartmentScreenPreview() {
     DepartmentScreen(modifier = Modifier, departmentList = DepartmentData.getDepartmentItems(), gridSize = 2 , items = DepartmentData.getUGItems())
