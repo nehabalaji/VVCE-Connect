@@ -1,14 +1,7 @@
 package com.project.vvce_connect.ui.screens.student.profile
 
-
-
-import android.net.Uri
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -17,14 +10,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.project.vvce_connect.R
-import androidx.activity.compose.rememberLauncherForActivityResult as rememberLauncherForActivityResult
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.project.vvce_connect.ui.screens.components.ButtonComponent
+import com.project.vvce_connect.ui.screens.components.ImageComponent
 
 @Composable
 fun StudentProfile(){
@@ -38,7 +31,7 @@ fun StudentProfile(){
         .verticalScroll(rememberScrollState())
         .padding(8.dp)) {
 
-        ContactImage()
+        ImageComponent(painter = painterResource(id = R.drawable.user) , content = "Contact Image")
 
         Row(modifier = Modifier
             .padding(8.dp)
@@ -102,43 +95,6 @@ fun StudentProfile(){
 
         ButtonComponent(text = "SignOut")
 
-    }
-}
-
-@Composable
-fun ContactImage() {
-    val imageUri = rememberSaveable { mutableStateOf("") }
-    val painter = rememberImagePainter(
-        if (imageUri.value.isEmpty())
-            R.drawable.user
-        else
-            imageUri.value
-
-    )
-
-    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let { imageUri.value = it.toString() }
-    }
-
-
-    Column(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(shape = CircleShape, modifier = Modifier
-            .padding(8.dp)
-            .size(100.dp)) {
-            Image(
-                painter = painter,
-                contentDescription = null,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .clickable { launcher.launch("image/*") },
-                contentScale = ContentScale.Crop
-            )
-        }
     }
 }
 
