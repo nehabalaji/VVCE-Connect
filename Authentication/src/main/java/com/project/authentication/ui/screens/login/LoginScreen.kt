@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.Authentication.R
@@ -71,9 +72,26 @@ fun LoginScreen(
         TextFieldComponent(label = "Username", onValueChanged = {
             loginViewModel.setEmail(it)
         }, error = emailError.value, errorMessage = "Enter a valid college email id")
-        PasswordFieldComponent(label = "Password", onValueChanged = {
-            loginViewModel.setPassword(it)
-        }, error = passwordError.value, errorMessage = "Enter a password with 8 or more characters")
+        PasswordFieldComponent(
+            label = "Password",
+            onValueChanged = {
+                loginViewModel.setPassword(it)
+            },
+            error = passwordError.value,
+            errorMessage = "Enter a password with 8 or more characters",
+            imeAction = ImeAction.Done,
+            onActionDone = {
+                emailError.value = !loginViewModel.validateEmailId()
+                passwordError.value = !loginViewModel.validatePassword()
+                loginViewModel.loginUser().addOnCompleteListener{
+                    if (it.isSuccessful) {
+                        composeNavigator.navigate(Screens.StudentDashboardScreen.route)
+                    } else {
+                        Toast.makeText(context, "Please check your credentials", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        )
         Spacer(modifier = Modifier.padding(20.dp))
         ButtonComponent(text = "Login", onClick = {
             emailError.value = !loginViewModel.validateEmailId()

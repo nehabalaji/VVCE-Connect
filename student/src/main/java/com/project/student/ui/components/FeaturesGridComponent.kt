@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.project.student.localdata.DashboardNavData
 import com.project.student.localdata.DashboardNavDetails
-import com.project.student.ui.theme.Purple500
+import com.project.student.ui.theme.Purple700
 
 @Composable
 fun FeaturesGridComponent(
@@ -29,7 +29,7 @@ fun FeaturesGridComponent(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         content = {
             items(items) { item ->
-                CardComponent(modifier = Modifier.background(Purple500), icon = item.icon, name = item.name)
+                CardComponent(modifier = Modifier.background(Purple700), icon = item.icon, name = item.name)
             }
         }
     )

@@ -97,7 +97,11 @@ fun RegistrationScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            TextComponent("Sign Up", modifier = Modifier, style = TextStyle(fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Purple700))
+            TextComponent(
+                "Sign Up",
+                modifier = Modifier,
+                style = TextStyle(fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Purple700)
+            )
             TextFieldComponent("Name", onValueChanged = {
                 registrationViewModel.setName(it)
             }, error = nameError.value, errorMessage = "Enter a valid name")
@@ -113,12 +117,24 @@ fun RegistrationScreen(
             TextFieldComponent("Year of Joining", onValueChanged = {
                 registrationViewModel.setYearOfJoining(it)
             })
-            PasswordFieldComponent("Password", onValueChanged = {
-                registrationViewModel.setPassword(it)
-            }, error = passwordError.value, errorMessage = "Enter a password with 8 or more characters", imeAction = ImeAction.Next)
-            PasswordFieldComponent("Confirm Password", onValueChanged = {
-                registrationViewModel.setConfirmedPassword(it)
-            }, error = confirmPasswordError.value, errorMessage = "Password does not match", imeAction = ImeAction.Done, onActionDone = {
+            PasswordFieldComponent(
+                "Password",
+                onValueChanged = {
+                    registrationViewModel.setPassword(it)
+                },
+                error = passwordError.value,
+                errorMessage = "Enter a password with 8 or more characters",
+                imeAction = ImeAction.Next
+            )
+            PasswordFieldComponent(
+                "Confirm Password",
+                onValueChanged = {
+                    registrationViewModel.setConfirmedPassword(it)
+                },
+                error = confirmPasswordError.value,
+                errorMessage = "Password does not match",
+                imeAction = ImeAction.Done,
+                onActionDone = {
                     nameError.value = !registrationViewModel.validateName()
                     phoneError.value = !registrationViewModel.validatePhoneNumber()
                     usnError.value = !registrationViewModel.validateUsn()
@@ -138,15 +154,24 @@ fun RegistrationScreen(
                                     "email" to registrationViewModel.email,
                                     "password" to registrationViewModel.password
                                 )
-                                registrationViewModel.addStudentToDb(student).addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        navController.navigate(Screens.StudentDashboardScreen.route)
-                                    } else {
-                                        Toast.makeText(context, "Something went wrong, please try again.", Toast.LENGTH_SHORT).show()
+                                registrationViewModel.addStudentToDb(student)
+                                    ?.addOnCompleteListener {
+                                        if (it.isSuccessful) {
+                                            navController.navigate(Screens.StudentDashboardScreen.route)
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "Something went wrong, please try again.",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
-                                }
                             } else {
-                                Toast.makeText(context, "Something went wrong, please try again.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Something went wrong, please try again.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
@@ -172,10 +197,24 @@ fun RegistrationScreen(
                                 "email" to registrationViewModel.email,
                                 "password" to registrationViewModel.password
                             )
-                            registrationViewModel.addStudentToDb(student)
+                            registrationViewModel.addStudentToDb(student)?.addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    navController.navigate(Screens.StudentDashboardScreen.route)
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "Something went wrong, please try again.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
                             navController.navigate(Screens.StudentDashboardScreen.route)
                         } else {
-                            Toast.makeText(context, "Something went wrong, please try again.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Something went wrong, please try again.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
@@ -186,7 +225,11 @@ fun RegistrationScreen(
             ) {
                 Text(
                     "Have an account? Login",
-                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Normal, color = Purple700)
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Purple700
+                    )
                 )
                 IconButton(onClick = {
                     navController.navigate(Screens.LoginScreen.route)

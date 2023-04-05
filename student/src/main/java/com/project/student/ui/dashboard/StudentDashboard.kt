@@ -15,11 +15,13 @@ import com.project.student.ui.components.TopAppBarComponent
 fun StudentDashboard() {
     ScaffoldComponent(
         modifier = Modifier,
-        content = {
+        topBar = {
             TopAppBarComponent(
                 modifier = Modifier,
                 title = "Hi, Neha!"
             )
+        },
+        content = {
             FeaturesGridComponent(
                 gridSize = 2,
                 items = DashboardNavData.getStudentDashboardItems(),

@@ -105,8 +105,11 @@ class RegistrationViewModel @Inject constructor(
         return auth.createUserWithEmailAndPassword(email, password)
     }
 
-    fun addStudentToDb(student: HashMap<String, String>): Task<DocumentReference> {
-        return db.collection("student")
-            .add(student)
+    fun addStudentToDb(student: HashMap<String, String>): Task<Void>? {
+        return student["usn"]?.let {
+            db.collection("student")
+                .document(it)
+                .set(student)
+        }
     }
 }

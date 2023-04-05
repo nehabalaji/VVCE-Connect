@@ -6,7 +6,7 @@ import com.project.student.localdata.DashboardNavDetails
 
 object DashboardNavData {
     fun getBottomNavItems(): List<DashboardNavDetails> {
-        val bottomNavItemList = listOf<DashboardNavDetails>(
+        return listOf(
             DashboardNavDetails(
                 name = "Home",
                 icon = Icons.Filled.Home
@@ -24,7 +24,6 @@ object DashboardNavData {
                 icon = Icons.Filled.Person
             )
         )
-        return bottomNavItemList
     }
 
     fun getStudentDashboardItems(): List<DashboardNavDetails> {
@@ -65,7 +64,7 @@ object DashboardNavData {
     }
 
     fun getTeacherDashboardItems(): List<DashboardNavDetails> {
-        val teacherDashboardItemsList = listOf<DashboardNavDetails>(
+        return listOf(
             DashboardNavDetails(
                 name = "Attendance",
                 icon = Icons.Filled.Rule
@@ -99,7 +98,5 @@ object DashboardNavData {
                 icon = Icons.Filled.Person
             )
         )
-
-        return teacherDashboardItemsList
     }
 }
