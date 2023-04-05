@@ -1,11 +1,10 @@
-package com.project.vvce_connect.ui.screens.localdata
+package com.project.student.localdata
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import com.project.student.localdata.DashboardNavDetails
 
 object DashboardNavData {
-    fun getBottomNavItems(): List<DashboardNavDetails> {
+    fun getBottomNavItems():List<DashboardNavDetails> {
         val bottomNavItemList = listOf<DashboardNavDetails>(
             DashboardNavDetails(
                 name = "Home",
@@ -27,8 +26,8 @@ object DashboardNavData {
         return bottomNavItemList
     }
 
-    fun getStudentDashboardItems(): List<DashboardNavDetails> {
-        return listOf(
+    fun getStudentDashboardItems():List<DashboardNavDetails>{
+        val studentDashboardItems = listOf<DashboardNavDetails>(
             DashboardNavDetails(
                 name = "Attendance",
                 icon = Icons.Filled.Rule
@@ -62,9 +61,11 @@ object DashboardNavData {
                 icon = Icons.Filled.RateReview
             )
         )
+
+        return studentDashboardItems
     }
 
-    fun getTeacherDashboardItems(): List<DashboardNavDetails> {
+    fun getTeacherDashboardItems():List<DashboardNavDetails>{
         val teacherDashboardItemsList = listOf<DashboardNavDetails>(
             DashboardNavDetails(
                 name = "Attendance",
