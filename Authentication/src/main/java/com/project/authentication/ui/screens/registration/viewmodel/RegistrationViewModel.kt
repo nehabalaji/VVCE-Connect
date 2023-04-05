@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.project.domain.models.Student
@@ -44,6 +43,12 @@ class RegistrationViewModel @Inject constructor(
 
     var confirmPassword = mutableStateOf("").value
         private set
+    
+    var section = mutableStateOf("").value
+        private set
+
+    var batch = mutableStateOf("").value
+        private set
 
     fun setName(inputString: String) {
         name = inputString
@@ -71,6 +76,14 @@ class RegistrationViewModel @Inject constructor(
 
     fun setConfirmedPassword(inputString: String) {
         confirmPassword = inputString
+    }
+
+    fun setSection(inputString: String) {
+        section = inputString
+    }
+
+    fun setBatch(inputString: String) {
+        batch = inputString
     }
 
     fun validateName(): Boolean {
@@ -111,5 +124,10 @@ class RegistrationViewModel @Inject constructor(
                 .document(it)
                 .set(student)
         }
+    }
+
+    fun getDepartment() {
+        val department = usn.substring(6, 7)
+        Log.v("DEPARTMENT", department)
     }
 }

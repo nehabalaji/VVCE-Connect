@@ -46,8 +46,7 @@ fun RegistrationScreen(
     context: Context
 ) {
     val registrationViewModel: RegistrationViewModel = hiltViewModel()
-    var auth: FirebaseAuth = Firebase.auth
-    val db = Firebase.firestore
+    val auth: FirebaseAuth = Firebase.auth
     val emailError = remember {
         mutableStateOf(false)
     }
@@ -117,6 +116,12 @@ fun RegistrationScreen(
             TextFieldComponent("Year of Joining", onValueChanged = {
                 registrationViewModel.setYearOfJoining(it)
             })
+            TextFieldComponent(label = "Section", onValueChanged = {
+                registrationViewModel.setSection(it)
+            })
+            TextFieldComponent(label = "Batch", onValueChanged = {
+                registrationViewModel.setBatch(it)
+            })
             PasswordFieldComponent(
                 "Password",
                 onValueChanged = {
@@ -152,8 +157,12 @@ fun RegistrationScreen(
                                     "phone" to registrationViewModel.phoneNumber,
                                     "usn" to registrationViewModel.usn,
                                     "email" to registrationViewModel.email,
-                                    "password" to registrationViewModel.password
+                                    "password" to registrationViewModel.password,
+                                    "year_of_joining" to registrationViewModel.yearOfJoining,
+                                    "section" to registrationViewModel.section,
+                                    "batch" to registrationViewModel.batch
                                 )
+                                registrationViewModel.getDepartment()
                                 registrationViewModel.addStudentToDb(student)
                                     ?.addOnCompleteListener {
                                         if (it.isSuccessful) {
@@ -175,7 +184,8 @@ fun RegistrationScreen(
                             }
                         }
                     }
-                })
+                }
+            )
 
             Spacer(modifier = Modifier.padding(10.dp))
             ButtonComponent("REGISTER") {
@@ -195,7 +205,10 @@ fun RegistrationScreen(
                                 "phone" to registrationViewModel.phoneNumber,
                                 "usn" to registrationViewModel.usn,
                                 "email" to registrationViewModel.email,
-                                "password" to registrationViewModel.password
+                                "password" to registrationViewModel.password,
+                                "year_of_joining" to registrationViewModel.yearOfJoining,
+                                "section" to registrationViewModel.section,
+                                "batch" to registrationViewModel.batch
                             )
                             registrationViewModel.addStudentToDb(student)?.addOnCompleteListener {
                                 if (it.isSuccessful) {
