@@ -2,10 +2,11 @@ package com.project.student.localdata
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import com.project.navigator.Screens
 
 object DashboardNavData {
-    fun getBottomNavItems():List<DashboardNavDetails> {
-        val bottomNavItemList = listOf<DashboardNavDetails>(
+    fun getBottomNavItems(): List<DashboardNavDetails> {
+        return listOf(
             DashboardNavDetails(
                 name = "Home",
                 icon = Icons.Filled.Home
@@ -23,50 +24,55 @@ object DashboardNavData {
                 icon = Icons.Filled.Person
             )
         )
-        return bottomNavItemList
     }
 
-    fun getStudentDashboardItems():List<DashboardNavDetails>{
-        val studentDashboardItems = listOf<DashboardNavDetails>(
+    fun getStudentDashboardItems(): List<DashboardNavDetails> {
+        return listOf(
             DashboardNavDetails(
                 name = "Attendance",
-                icon = Icons.Filled.Rule
+                icon = Icons.Filled.Rule,
+                screen = Screens.StudentAttendance.route
             ),
             DashboardNavDetails(
                 name = "Performance Report",
-                icon = Icons.Filled.ChromeReaderMode
+                icon = Icons.Filled.ChromeReaderMode,
+                screen = Screens.StudentPerformanceReport.route
             ),
             DashboardNavDetails(
                 name = "Course Work",
-                icon = Icons.Filled.Book
+                icon = Icons.Filled.Book,
+                screen = Screens.StudentCourseWork.route
             ),
             DashboardNavDetails(
                 name = "Time Table",
-                icon = Icons.Filled.CalendarMonth
+                icon = Icons.Filled.CalendarMonth,
+                screen = Screens.StudentTimeTable.route
             ),
             DashboardNavDetails(
                 name = "Placements",
-                icon = Icons.Filled.SupervisedUserCircle
+                icon = Icons.Filled.SupervisedUserCircle,
+                screen = Screens.StudentPlacements.route
             ),
             DashboardNavDetails(
                 name = "Exam Form",
-                icon = Icons.Filled.Description
+                icon = Icons.Filled.Description,
+                screen = Screens.StudentExamForm.route
             ),
             DashboardNavDetails(
                 name = "Exam Fee",
-                icon = Icons.Filled.Payments
+                icon = Icons.Filled.Payments,
+                screen = Screens.StudentExamFee.route
             ),
             DashboardNavDetails(
                 name = "Feedback",
-                icon = Icons.Filled.RateReview
+                icon = Icons.Filled.RateReview,
+                screen = Screens.StudentFeedback.route
             )
         )
-
-        return studentDashboardItems
     }
 
-    fun getTeacherDashboardItems():List<DashboardNavDetails>{
-        val teacherDashboardItemsList = listOf<DashboardNavDetails>(
+    fun getTeacherDashboardItems(): List<DashboardNavDetails> {
+        return listOf(
             DashboardNavDetails(
                 name = "Attendance",
                 icon = Icons.Filled.Rule
@@ -100,7 +106,5 @@ object DashboardNavData {
                 icon = Icons.Filled.Person
             )
         )
-
-        return teacherDashboardItemsList
     }
 }

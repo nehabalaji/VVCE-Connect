@@ -1,3 +1,51 @@
 package com.project.student.ui.attendance
 
-class AttendanceScreen
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PieChart
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.project.student.ui.components.BoxInBox
+import com.project.student.ui.components.CardAttendance
+import com.project.student.ui.components.DisplayNumberBox
+import com.project.student.ui.components.IconImageComponent
+
+@Composable
+fun AttendanceScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
+        BoxInBox(modifier = Modifier, text = "Attendance", subject = "Cryptography")
+        Box(
+            modifier = Modifier
+                .padding(top = 36.dp, start = 24.dp, end = 24.dp)
+                .height(300.dp)
+                .align(Alignment.CenterHorizontally)
+        ) {
+            IconImageComponent(
+                modifier = Modifier.size(248.dp),
+                image = Icons.Filled.PieChart,
+                content = "Pie Chart"
+            )
+        }
+        DisplayNumberBox(modifier = Modifier, title = "Total Working Days", number = "24", color = Color.Unspecified)
+        Row(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
+            CardAttendance(modifier = Modifier, type = "Present", attendance = "03", color = Color.Green)
+            CardAttendance(modifier = Modifier, type = "Absent", attendance = "20", color = Color.Red)
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AttendanceScreenPreview() {
+    AttendanceScreen()
+}

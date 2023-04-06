@@ -1,33 +1,38 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package com.project.student.ui.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.student.ui.theme.Purple500
+import com.project.student.localdata.DashboardNavDetails
 import com.project.student.ui.theme.Purple700
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CardComponent(
     modifier: Modifier = Modifier.padding(vertical = 10.dp),
-    icon: ImageVector, name: String
+    icon: ImageVector,
+    name: String,
+    onClick: () -> Unit = {}
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .padding(10.dp)
+            .height(148.dp)
+            .verticalScroll(rememberScrollState()),
         elevation = 10.dp,
         backgroundColor = Purple700,
-        shape = MaterialTheme.shapes.large
+        shape = MaterialTheme.shapes.large,
+        onClick = onClick
     ) {
         Column(
             modifier = modifier
@@ -48,10 +53,4 @@ fun CardComponent(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun CardComponentPreview() {
-    CardComponent(modifier = Modifier, icon = Icons.Filled.Person, name = "Profile")
 }

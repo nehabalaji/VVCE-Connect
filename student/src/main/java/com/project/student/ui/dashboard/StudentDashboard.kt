@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.project.navigator.ComposeNavigator
 import com.project.student.localdata.DashboardNavData
 import com.project.student.ui.components.BottomNavigationBar
 import com.project.student.ui.components.FeaturesGridComponent
@@ -12,7 +13,9 @@ import com.project.student.ui.components.ScaffoldComponent
 import com.project.student.ui.components.TopAppBarComponent
 
 @Composable
-fun StudentDashboard() {
+fun StudentDashboard(
+    composeNavigator: ComposeNavigator
+) {
     ScaffoldComponent(
         modifier = Modifier,
         topBar = {
@@ -25,7 +28,8 @@ fun StudentDashboard() {
             FeaturesGridComponent(
                 gridSize = 2,
                 items = DashboardNavData.getStudentDashboardItems(),
-                modifier = Modifier.background(Color.White)
+                modifier = Modifier.background(Color.White),
+                composeNavigator = composeNavigator
             )
         },
         bottomBar = {
@@ -35,10 +39,4 @@ fun StudentDashboard() {
             )
         }
     )
-}
-
-@Preview
-@Composable
-fun StudentDashboardPreview() {
-    StudentDashboard()
 }

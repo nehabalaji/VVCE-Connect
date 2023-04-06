@@ -26,6 +26,22 @@ sealed class Screens(
         )
     )
     object StudentDashboardScreen : Screens("studentDashboard")
+
+    object StudentAttendance : Screens("studentAttendance")
+
+    object StudentPerformanceReport : Screens("studentPerformanceReport")
+
+    object StudentCourseWork : Screens("studentCourseWork")
+
+    object StudentTimeTable : Screens("studentTimeTable")
+
+    object StudentPlacements : Screens("studentPlacements")
+
+    object StudentExamForm : Screens("studentExamForm")
+
+    object StudentExamFee : Screens("studentExamFee")
+
+    object StudentFeedback : Screens("studentFeedback")
 }
 
 sealed class Routes(val name: String) {
