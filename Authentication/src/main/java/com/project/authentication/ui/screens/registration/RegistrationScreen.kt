@@ -157,7 +157,6 @@ fun RegistrationScreen(
                                     "phone" to registrationViewModel.phoneNumber,
                                     "usn" to registrationViewModel.usn,
                                     "email" to registrationViewModel.email,
-                                    "password" to registrationViewModel.password,
                                     "year_of_joining" to registrationViewModel.yearOfJoining,
                                     "section" to registrationViewModel.section,
                                     "batch" to registrationViewModel.batch

@@ -43,7 +43,7 @@ class RegistrationViewModel @Inject constructor(
 
     var confirmPassword = mutableStateOf("").value
         private set
-    
+
     var section = mutableStateOf("").value
         private set
 
@@ -119,7 +119,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     fun addStudentToDb(student: HashMap<String, String>): Task<Void>? {
-        return student["usn"]?.let {
+        return student["email"]?.let {
             db.collection("student")
                 .document(it)
                 .set(student)

@@ -8,8 +8,8 @@ import com.project.data.model.DStudent
 @Dao
 interface Dao {
 
-    @Query("SELECT * FROM DStudent WHERE usn=:usn")
-    fun getStudent(usn: String): DStudent
+    @Query("SELECT * FROM DStudent WHERE emailId=:email")
+    fun getStudent(email: String): DStudent?
 
     @Insert
     suspend fun insertStudent(student: DStudent)
