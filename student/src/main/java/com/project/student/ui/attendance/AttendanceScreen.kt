@@ -1,51 +1,55 @@
 package com.project.student.ui.attendance
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PieChart
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.project.student.ui.components.BoxInBox
-import com.project.student.ui.components.CardAttendance
-import com.project.student.ui.components.DisplayNumberBox
-import com.project.student.ui.components.IconImageComponent
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.project.navigator.ComposeNavigator
+import com.project.navigator.Screens
 
 @Composable
-fun AttendanceScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        BoxInBox(modifier = Modifier, text = "Attendance", subject = "Cryptography")
-        Box(
-            modifier = Modifier
-                .padding(top = 36.dp, start = 24.dp, end = 24.dp)
-                .height(300.dp)
-                .align(Alignment.CenterHorizontally)
-        ) {
-            IconImageComponent(
-                modifier = Modifier.size(248.dp),
-                image = Icons.Filled.PieChart,
-                content = "Pie Chart"
+fun AttendanceScreen(
+    composeNavigator: ComposeNavigator,
+    viewModel: AttendanceViewModel = hiltViewModel(),
+) {
+    val courseList by viewModel.courseList.collectAsState()
+    val courseListItems by courseList.collectAsState(initial = emptyList())
+
+    LazyColumn() {
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                shape = RoundedCornerShape(
+                    topStart = 0.dp,
+                    topEnd = 0.dp,
+                    bottomStart = 40.dp,
+                    bottomEnd = 40.dp,
+                ),
+            ) {
+                Text(text = "Attendance")
+            }
+        }
+
+        items(courseListItems) {
+            Text(
+                text = it.subject_title,
+                modifier = Modifier.padding(16.dp).clickable {
+                    composeNavigator.navigate(Screens.StudentAttendanceDetail.route.plus("/${it.subject_title}/${it.subject_code}/${it.missed}/${it.attended}"))
+                },
             )
         }
-        DisplayNumberBox(modifier = Modifier, title = "Total Working Days", number = "24", color = Color.Unspecified)
-        Row(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
-            CardAttendance(modifier = Modifier, type = "Present", attendance = "03", color = Color.Green)
-            CardAttendance(modifier = Modifier, type = "Absent", attendance = "20", color = Color.Red)
-        }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AttendanceScreenPreview() {
-    AttendanceScreen()
 }

@@ -9,6 +9,7 @@ import com.project.navigator.ComposeNavigator
 import com.project.navigator.Routes
 import com.project.navigator.Screens
 import com.project.student.ui.attendance.AttendanceScreen
+import com.project.student.ui.attendanceeDetail.AttendanceDetail
 import com.project.student.ui.courseWork.CourseWorkScreen
 import com.project.student.ui.examFee.ExamFeeScreen
 import com.project.student.ui.examForm.ExamFormScreen
@@ -26,7 +27,15 @@ fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context:
             StudentDashboard(composeNavigator)
         }
         composable(Screens.StudentAttendance.name) {
-            AttendanceScreen()
+            AttendanceScreen(composeNavigator)
+        }
+        composable(Screens.StudentAttendanceDetail.name) {
+            val subjectTitle = it.arguments?.getString("subject_title") ?: ""
+            val subjectCode = it.arguments?.getString("subject_code") ?: ""
+            val missed = it.arguments?.getString("missed") ?: ""
+            val attended = it.arguments?.getString("attended") ?: ""
+
+            AttendanceDetail(composeNavigator, subjectCode, subjectTitle, attended, missed)
         }
         composable(Screens.StudentPerformanceReport.name) {
             PerformanceReportScreen()

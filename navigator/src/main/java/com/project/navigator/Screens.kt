@@ -29,6 +29,24 @@ sealed class Screens(
 
     object StudentAttendance : Screens("studentAttendance")
 
+    object StudentAttendanceDetail : Screens(
+        "studentAttendanceDetail",
+        listOf(
+            navArgument("subject_title") {
+                type = NavType.StringType
+            },
+            navArgument("subject_code") {
+                type = NavType.StringType
+            },
+            navArgument("missed") {
+                type = NavType.StringType
+            },
+            navArgument("attended") {
+                type = NavType.StringType
+            },
+        ),
+    )
+
     object StudentPerformanceReport : Screens("studentPerformanceReport")
 
     object StudentCourseWork : Screens("studentCourseWork")
