@@ -51,6 +51,15 @@ sealed class Screens(
 
     object StudentCourseWork : Screens("studentCourseWork")
 
+    object StudentCourseWorkDetails : Screens(
+        "studentCourseWorkDetails",
+        listOf(
+            navArgument("subject_id") {
+                type = NavType.StringType
+            }
+        )
+    )
+
     object StudentTimeTable : Screens("studentTimeTable")
 
     object StudentPlacements : Screens("studentPlacements")

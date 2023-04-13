@@ -50,6 +50,9 @@ class RegistrationViewModel @Inject constructor(
     var batch = mutableStateOf("").value
         private set
 
+    var sem = mutableStateOf("").value
+        private set
+
     fun setName(inputString: String) {
         name = inputString
     }
@@ -86,6 +89,10 @@ class RegistrationViewModel @Inject constructor(
         batch = inputString
     }
 
+    fun setSem(inputString: String) {
+        sem = inputString
+    }
+
     fun validateName(): Boolean {
         return name.isNotBlank()
     }
@@ -111,7 +118,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     fun insertStudent() = viewModelScope.launch {
-        insertStudentUseCase(Student(name, phoneNumber, usn, email, yearOfJoining, password))
+        insertStudentUseCase(Student(name, phoneNumber, usn, email, yearOfJoining, sem, getDepartment()))
     }
 
     fun registerStudent(): Task<AuthResult> {
@@ -126,8 +133,9 @@ class RegistrationViewModel @Inject constructor(
         }
     }
 
-    fun getDepartment() {
+    fun getDepartment(): String {
         val department = usn.substring(6, 7)
         Log.v("DEPARTMENT", department)
+        return department.uppercase()
     }
 }

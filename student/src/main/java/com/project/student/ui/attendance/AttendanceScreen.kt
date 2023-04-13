@@ -36,8 +36,8 @@ fun AttendanceScreen(
                     topStart = 0.dp,
                     topEnd = 0.dp,
                     bottomStart = 40.dp,
-                    bottomEnd = 40.dp,
-                ),
+                    bottomEnd = 40.dp
+                )
             ) {
                 Text(text = "Attendance")
             }

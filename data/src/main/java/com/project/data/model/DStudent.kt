@@ -11,5 +11,7 @@ data class DStudent(
     @PrimaryKey(autoGenerate = false)
     val emailId: String,
     val yearOfJoining: String,
+    val sem: String,
+    val branch: String,
     val role: String = "Student"
 )

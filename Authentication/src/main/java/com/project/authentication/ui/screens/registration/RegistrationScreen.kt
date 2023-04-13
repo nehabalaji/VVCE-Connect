@@ -116,6 +116,9 @@ fun RegistrationScreen(
             TextFieldComponent("Year of Joining", onValueChanged = {
                 registrationViewModel.setYearOfJoining(it)
             })
+            TextFieldComponent("Semester", onValueChanged = {
+                registrationViewModel.setYearOfJoining(it)
+            })
             TextFieldComponent(label = "Section", onValueChanged = {
                 registrationViewModel.setSection(it)
             })
@@ -159,9 +162,10 @@ fun RegistrationScreen(
                                     "email" to registrationViewModel.email,
                                     "year_of_joining" to registrationViewModel.yearOfJoining,
                                     "section" to registrationViewModel.section,
+                                    "sem" to registrationViewModel.sem,
+                                    "branch" to registrationViewModel.getDepartment(),
                                     "batch" to registrationViewModel.batch
                                 )
-                                registrationViewModel.getDepartment()
                                 registrationViewModel.addStudentToDb(student)
                                     ?.addOnCompleteListener {
                                         if (it.isSuccessful) {
@@ -207,6 +211,8 @@ fun RegistrationScreen(
                                 "password" to registrationViewModel.password,
                                 "year_of_joining" to registrationViewModel.yearOfJoining,
                                 "section" to registrationViewModel.section,
+                                "sem" to registrationViewModel.sem,
+                                "branch" to registrationViewModel.getDepartment(),
                                 "batch" to registrationViewModel.batch
                             )
                             registrationViewModel.addStudentToDb(student)?.addOnCompleteListener {

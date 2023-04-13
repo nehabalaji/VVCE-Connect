@@ -101,18 +101,24 @@ fun LoginScreen(
                                             val phone = it.result.data?.get("phone").toString()
                                             val yearOfJoining =
                                                 it.result.data?.get("year_of_joining").toString()
+                                            val sem = it.result.data?.get("sem").toString()
+                                            val branch = it.result.data?.get("branch").toString()
                                             val student = Student(
                                                 name,
                                                 phone,
                                                 usn,
                                                 loginViewModel.email,
-                                                yearOfJoining
+                                                yearOfJoining,
+                                                sem,
+                                                branch
                                             )
                                             Log.v("STUDENT", student.toString())
                                             loginViewModel.insertStudent(student)
                                             composeNavigator.navigate(Screens.StudentDashboardScreen.route)
                                         }
                                     }
+                            } else {
+                                composeNavigator.navigate(Screens.StudentDashboardScreen.route)
                             }
                         }
                     } else {
@@ -137,18 +143,24 @@ fun LoginScreen(
                                         val phone = it.result.data?.get("phone").toString()
                                         val yearOfJoining =
                                             it.result.data?.get("year_of_joining").toString()
+                                        val sem = it.result.data?.get("sem").toString()
+                                        val branch = it.result.data?.get("branch").toString()
                                         val student = Student(
                                             name,
                                             phone,
                                             usn,
                                             loginViewModel.email,
-                                            yearOfJoining
+                                            yearOfJoining,
+                                            sem,
+                                            branch
                                         )
                                         Log.v("STUDENT", student.toString())
                                         loginViewModel.insertStudent(student)
                                         composeNavigator.navigate(Screens.StudentDashboardScreen.route)
                                     }
                                 }
+                        } else {
+                            composeNavigator.navigate(Screens.StudentDashboardScreen.route)
                         }
                     }
                 } else {
