@@ -8,5 +8,6 @@ data class Student(
     val yearOfJoining: String,
     val sem: String,
     val branch: String,
+    val section: String,
     val role: String = "Student"
 )

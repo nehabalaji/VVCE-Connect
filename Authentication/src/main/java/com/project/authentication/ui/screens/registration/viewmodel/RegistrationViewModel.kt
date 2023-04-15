@@ -118,7 +118,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     fun insertStudent() = viewModelScope.launch {
-        insertStudentUseCase(Student(name, phoneNumber, usn, email, yearOfJoining, sem, getDepartment()))
+        insertStudentUseCase(Student(name, phoneNumber, usn, email, yearOfJoining, sem, getDepartment(), section))
     }
 
     fun registerStudent(): Task<AuthResult> {

@@ -103,6 +103,7 @@ fun LoginScreen(
                                                 it.result.data?.get("year_of_joining").toString()
                                             val sem = it.result.data?.get("sem").toString()
                                             val branch = it.result.data?.get("branch").toString()
+                                            val section = it.result.data?.get("section").toString()
                                             val student = Student(
                                                 name,
                                                 phone,
@@ -110,7 +111,8 @@ fun LoginScreen(
                                                 loginViewModel.email,
                                                 yearOfJoining,
                                                 sem,
-                                                branch
+                                                branch,
+                                                section
                                             )
                                             Log.v("STUDENT", student.toString())
                                             loginViewModel.insertStudent(student)
@@ -145,6 +147,7 @@ fun LoginScreen(
                                             it.result.data?.get("year_of_joining").toString()
                                         val sem = it.result.data?.get("sem").toString()
                                         val branch = it.result.data?.get("branch").toString()
+                                        val section = it.result.data?.get("section").toString()
                                         val student = Student(
                                             name,
                                             phone,
@@ -152,7 +155,8 @@ fun LoginScreen(
                                             loginViewModel.email,
                                             yearOfJoining,
                                             sem,
-                                            branch
+                                            branch,
+                                            section
                                         )
                                         Log.v("STUDENT", student.toString())
                                         loginViewModel.insertStudent(student)

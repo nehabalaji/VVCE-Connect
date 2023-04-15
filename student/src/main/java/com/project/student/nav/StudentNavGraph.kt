@@ -50,7 +50,7 @@ fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context:
             CourseWorkDetails(subject)
         }
         composable(Screens.StudentTimeTable.name) {
-            TimetableScreen()
+            TimetableScreen(context)
         }
         composable(Screens.StudentPlacements.name) {
             PlacementsScreen()
