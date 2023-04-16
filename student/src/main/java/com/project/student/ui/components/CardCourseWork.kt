@@ -29,8 +29,8 @@ fun CardCourseWork(modifier: Modifier, icon: ImageVector, title: String, date: S
         elevation = 10.dp,
         backgroundColor = MaterialTheme.colors.background,
     ) {
-        Row(modifier = modifier.padding(end = 24.dp), verticalAlignment = Alignment.CenterVertically) {
-            IconImageComponent(modifier = modifier.size(50.dp), image = icon, content = "Icon")
+        Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
+            IconImageComponent(modifier = modifier.size(40.dp), image = icon, content = "Icon")
             Column(modifier = modifier) {
                 TextComponent(text = title, modifier = modifier, style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 24.sp))
                 TextComponent(text = date, modifier = modifier, style = TextStyle(fontSize = 12.sp))

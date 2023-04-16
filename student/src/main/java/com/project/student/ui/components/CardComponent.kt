@@ -2,8 +2,10 @@
 
 package com.project.student.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -27,8 +29,7 @@ fun CardComponent(
     Card(
         modifier = modifier
             .padding(10.dp)
-            .height(148.dp)
-            .verticalScroll(rememberScrollState()),
+            .height(148.dp),
         elevation = 10.dp,
         backgroundColor = Purple700,
         shape = MaterialTheme.shapes.large,

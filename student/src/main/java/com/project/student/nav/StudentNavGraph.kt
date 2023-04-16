@@ -13,7 +13,7 @@ import com.project.student.ui.courseWork.CourseWorkDetails
 import com.project.student.ui.courseWork.CourseWorkScreen
 import com.project.student.ui.dashboard.StudentDashboard
 import com.project.student.ui.examFee.ExamFeeScreen
-import com.project.student.ui.examForm.ExamFormScreen
+import com.project.student.ui.timetable.examForm.ExamFormScreen
 import com.project.student.ui.feedback.FeedbackScreen
 import com.project.student.ui.performanceReport.PerformanceReportDetailScreen
 import com.project.student.ui.performanceReport.PerformanceReportScreen

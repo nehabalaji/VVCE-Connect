@@ -47,7 +47,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(bottom=16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -71,8 +71,7 @@ fun LoginScreen(
                     .padding(10.dp)
             )
         }
-        ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "VVCE logo")
-        Spacer(modifier = Modifier.padding(16.dp))
+        Spacer(modifier = Modifier.padding(64.dp))
         TextComponent(text = "Login", modifier = Modifier, style = TextStyle(fontSize = MaterialTheme.typography.h3.fontSize, fontWeight = FontWeight.Bold))
         Spacer(modifier = Modifier.padding(20.dp))
         TextFieldComponent(label = "Username", onValueChanged = {
