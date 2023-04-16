@@ -36,7 +36,7 @@ object DashboardNavData {
             DashboardNavDetails(
                 name = "Performance Report",
                 icon = Icons.Filled.ChromeReaderMode,
-                screen = Screens.StudentPerformanceReport.route
+                screen = Screens.StudentPerformanceReport.name
             ),
             DashboardNavDetails(
                 name = "Course Work",
@@ -59,14 +59,14 @@ object DashboardNavData {
                 screen = Screens.StudentExamForm.route
             ),
             DashboardNavDetails(
-                name = "Exam Fee",
-                icon = Icons.Filled.Payments,
-                screen = Screens.StudentExamFee.route
-            ),
-            DashboardNavDetails(
                 name = "Feedback",
                 icon = Icons.Filled.RateReview,
                 screen = Screens.StudentFeedback.route
+            ),
+            DashboardNavDetails(
+                name = "About Us",
+                icon = Icons.Filled.Payments,
+                screen = Screens.StudentExamFee.route
             )
         )
     }

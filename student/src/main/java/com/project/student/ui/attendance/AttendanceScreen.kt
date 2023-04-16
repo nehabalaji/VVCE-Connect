@@ -21,7 +21,7 @@ import com.project.navigator.Screens
 @Composable
 fun AttendanceScreen(
     composeNavigator: ComposeNavigator,
-    viewModel: AttendanceViewModel = hiltViewModel(),
+    viewModel: AttendanceViewModel = hiltViewModel()
 ) {
     val courseList by viewModel.courseList.collectAsState()
     val courseListItems by courseList.collectAsState(initial = emptyList())

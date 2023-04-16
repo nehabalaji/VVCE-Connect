@@ -38,7 +38,7 @@ class CourseWorkViewModel @Inject constructor(
         }
     }
 
-    private fun getResources(email: String) = viewModelScope.launch(Dispatchers.IO){
+    private fun getResources(email: String) = viewModelScope.launch(Dispatchers.IO) {
         val student = getStudentUseCase(email)
         val docRef = db.collection("subjects").document(student?.sem.toString()).collection(student?.branch.toString()).get()
         docRef.addOnCompleteListener {
@@ -47,7 +47,8 @@ class CourseWorkViewModel @Inject constructor(
                     subjectList.add(doc.id)
                 }
                 Log.d("TAG", subjectList.toString())
-                _subjectList.value = flow { emit(subjectList)
+                _subjectList.value = flow {
+                    emit(subjectList)
                 }
             } else {
                 Log.d("TAG", "Error getting documents: ", it.exception)
@@ -55,7 +56,7 @@ class CourseWorkViewModel @Inject constructor(
         }
     }
 
-    fun getResourcesForSubject(subjectId: String) = viewModelScope.launch(Dispatchers.IO){
+    fun getResourcesForSubject(subjectId: String) = viewModelScope.launch(Dispatchers.IO) {
         val student = getStudentUseCase(auth.currentUser?.email.toString())
         val resList = mutableListOf<CourseWorkDetails>()
         val resourceRef = db.collection("subjects").document(student?.sem.toString()).collection(student?.branch.toString()).document(subjectId).get()

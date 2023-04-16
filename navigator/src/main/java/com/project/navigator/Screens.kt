@@ -43,11 +43,20 @@ sealed class Screens(
             },
             navArgument("attended") {
                 type = NavType.StringType
-            },
-        ),
+            }
+        )
     )
 
     object StudentPerformanceReport : Screens("studentPerformanceReport")
+
+    object StudentPerformanceReportDetails : Screens(
+        "studentsPerformanceReportDetails",
+        listOf(
+            navArgument("subject_title") {
+                type = NavType.StringType
+            }
+        )
+    )
 
     object StudentCourseWork : Screens("studentCourseWork")
 

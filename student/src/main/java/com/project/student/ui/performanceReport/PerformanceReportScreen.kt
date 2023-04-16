@@ -1,41 +1,55 @@
 package com.project.student.ui.performanceReport
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BarChart
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.project.student.ui.components.BoxInBox
-import com.project.student.ui.components.DisplayNumberBox
-import com.project.student.ui.components.IconImageComponent
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.project.navigator.ComposeNavigator
+import com.project.navigator.Screens
+import com.project.student.ui.courseWork.viewmodel.CourseWorkViewModel
+import com.project.student.ui.performanceReport.viewmodel.PerformanceReportViewModel
 
 @Composable
-fun PerformanceReportScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        BoxInBox(modifier = Modifier, text = "Performance Report", subject = "Operating Systems")
-        Box(
-            modifier = Modifier
-                .padding(top = 36.dp, start = 24.dp, end = 24.dp)
-                .height(300.dp)
-                .align(Alignment.CenterHorizontally)
-        ) {
-            IconImageComponent(
-                modifier = Modifier.size(248.dp),
-                image = Icons.Filled.BarChart,
-                content = "Bar Chart"
+fun PerformanceReportScreen(
+    composeNavigator: ComposeNavigator,
+    performanceReportViewModel: PerformanceReportViewModel = hiltViewModel()
+) {
+    val courseList by performanceReportViewModel.subjects.collectAsState()
+    val courseListItems by courseList.collectAsState(initial = emptyList())
+
+    LazyColumn() {
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                shape = RoundedCornerShape(
+                    topStart = 0.dp,
+                    topEnd = 0.dp,
+                    bottomStart = 40.dp,
+                    bottomEnd = 40.dp
+                )
+            ) {
+                Text(text = "Performance report")
+            }
+        }
+
+        items(courseListItems) {
+            Text(
+                text = it,
+                modifier = Modifier.padding(16.dp).clickable {
+                    composeNavigator.navigate(Screens.StudentPerformanceReportDetails.route.plus("/$it"))
+                }
             )
         }
-        DisplayNumberBox(modifier = Modifier, title = "CIE 1", number = "25", color = Color.LightGray)
-        DisplayNumberBox(modifier = Modifier, title = "CIE 2", number = "21", color = Color.LightGray)
-        DisplayNumberBox(modifier = Modifier, title = "CIE 3", number = "28", color = Color.LightGray)
     }
 }
