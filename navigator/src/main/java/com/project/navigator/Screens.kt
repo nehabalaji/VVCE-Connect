@@ -75,7 +75,9 @@ sealed class Screens(
 
     object StudentExamForm : Screens("studentExamForm")
 
-    object StudentExamFee : Screens("studentExamFee")
+    object Settings : Screens("settings")
+
+    object AboutUs : Screens("aboutUs")
 
     object StudentFeedback : Screens("studentFeedback")
 }

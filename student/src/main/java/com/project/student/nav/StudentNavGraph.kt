@@ -12,12 +12,12 @@ import com.project.student.ui.attendanceeDetail.AttendanceDetail
 import com.project.student.ui.courseWork.CourseWorkDetails
 import com.project.student.ui.courseWork.CourseWorkScreen
 import com.project.student.ui.dashboard.StudentDashboard
-import com.project.student.ui.examFee.ExamFeeScreen
-import com.project.student.ui.timetable.examForm.ExamFormScreen
+import com.project.student.ui.examForm.ExamFormScreen
 import com.project.student.ui.feedback.FeedbackScreen
 import com.project.student.ui.performanceReport.PerformanceReportDetailScreen
 import com.project.student.ui.performanceReport.PerformanceReportScreen
 import com.project.student.ui.placements.PlacementsScreen
+import com.project.student.ui.settings.SettingsScreen
 import com.project.student.ui.timetable.TimetableScreen
 
 fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context: Context) {
@@ -26,7 +26,7 @@ fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context:
         route = Routes.OnBoarding.name
     ) {
         composable(Screens.StudentDashboardScreen.name) {
-            StudentDashboard(composeNavigator)
+            StudentDashboard(composeNavigator, context)
         }
         composable(Screens.StudentAttendance.name) {
             AttendanceScreen(composeNavigator)
@@ -64,8 +64,8 @@ fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context:
         composable(Screens.StudentExamForm.name) {
             ExamFormScreen()
         }
-        composable(Screens.StudentExamFee.name) {
-            ExamFeeScreen()
+        composable(Screens.Settings.name) {
+            SettingsScreen()
         }
         composable(Screens.StudentFeedback.name) {
             FeedbackScreen()

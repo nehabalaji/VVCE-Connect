@@ -1,4 +1,7 @@
 package com.project.student.ui.notification
 
-class NotificationScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun NotificationScreen() {
 }
