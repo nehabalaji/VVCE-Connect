@@ -40,7 +40,7 @@ fun CourseWorkDetails(
                 backgroundColor = Purple500,
             ) {
                 Text(
-                    text = "Resources",
+                    text = subjectId,
                     modifier = Modifier.padding(20.dp),
                     style = TextStyle(
                         fontSize = 36.sp,

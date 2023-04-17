@@ -28,10 +28,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.project.authentication.ui.components.ButtonComponent
+import com.project.authentication.ui.components.DatePickerComponent
 import com.project.authentication.ui.components.PasswordFieldComponent
+import com.project.authentication.ui.components.SpinnerComponent
 import com.project.authentication.ui.components.TextComponent
 import com.project.authentication.ui.components.TextFieldComponent
 import com.project.authentication.ui.screens.registration.viewmodel.RegistrationViewModel
@@ -43,7 +44,7 @@ import com.project.navigator.Screens
 @Composable
 fun RegistrationScreen(
     navController: ComposeNavigator,
-    context: Context
+    context: Context,
 ) {
     val registrationViewModel: RegistrationViewModel = hiltViewModel()
     val auth: FirebaseAuth = Firebase.auth
@@ -67,7 +68,7 @@ fun RegistrationScreen(
     }
 
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
+        modifier = Modifier.verticalScroll(rememberScrollState()),
     ) {
         Card(
             modifier = Modifier
@@ -77,8 +78,8 @@ fun RegistrationScreen(
                 topStart = 0.dp,
                 topEnd = 0.dp,
                 bottomStart = 40.dp,
-                bottomEnd = 40.dp
-            )
+                bottomEnd = 40.dp,
+            ),
         ) {
             Image(
                 painter = painterResource(id = com.project.Authentication.R.drawable.vvce_connect_banner),
@@ -86,7 +87,7 @@ fun RegistrationScreen(
                 alignment = Alignment.Center,
                 modifier = Modifier
                     .background(Purple500)
-                    .padding(10.dp)
+                    .padding(10.dp),
             )
         }
         Column(
@@ -94,12 +95,12 @@ fun RegistrationScreen(
                 .fillMaxWidth()
                 .padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             TextComponent(
                 "Sign Up",
                 modifier = Modifier,
-                style = TextStyle(fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Purple700)
+                style = TextStyle(fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Purple700),
             )
             TextFieldComponent("Name", onValueChanged = {
                 registrationViewModel.setName(it)
@@ -113,18 +114,28 @@ fun RegistrationScreen(
             TextFieldComponent("Email id", onValueChanged = {
                 registrationViewModel.setEmail(it)
             }, error = emailError.value, errorMessage = "Enter a valid college email id")
-            TextFieldComponent("Year of Joining", onValueChanged = {
-                registrationViewModel.setYearOfJoining(it)
-            })
-            TextFieldComponent("Semester", onValueChanged = {
-                registrationViewModel.setYearOfJoining(it)
-            })
-            TextFieldComponent(label = "Section", onValueChanged = {
-                registrationViewModel.setSection(it)
-            })
-            TextFieldComponent(label = "Batch", onValueChanged = {
-                registrationViewModel.setBatch(it)
-            })
+            SpinnerComponent(
+                label = "Year of Joining",
+                options = listOf("2019","2020","2021","2022","2023","2024"),
+                onValueChanged = {
+                    registrationViewModel.setYearOfJoining(it)
+                }
+            )
+            SpinnerComponent(
+                label = "Semester",
+                options = listOf(1,2,3,4,5,6,7,8),
+                onValueChanged = {
+                    registrationViewModel.setYearOfJoining(it.toString())
+                },
+            )
+            SpinnerComponent(
+                label = "Section",
+                options = listOf("A", "B", "C"),
+                onValueChanged = {
+                    registrationViewModel.setSection(it)
+                },
+            )
+            SpinnerComponent(label = "Branch", options = listOf("AI & ML", "CSE", "ISE", "Mechanical", "ECE", "EEE", "Civil"))
             PasswordFieldComponent(
                 "Password",
                 onValueChanged = {
@@ -132,7 +143,7 @@ fun RegistrationScreen(
                 },
                 error = passwordError.value,
                 errorMessage = "Enter a password with 8 or more characters",
-                imeAction = ImeAction.Next
+                imeAction = ImeAction.Next,
             )
             PasswordFieldComponent(
                 "Confirm Password",
@@ -164,7 +175,7 @@ fun RegistrationScreen(
                                     "section" to registrationViewModel.section,
                                     "sem" to registrationViewModel.sem,
                                     "branch" to registrationViewModel.getDepartment(),
-                                    "batch" to registrationViewModel.batch
+                                    "batch" to registrationViewModel.batch,
                                 )
                                 registrationViewModel.addStudentToDb(student)
                                     ?.addOnCompleteListener {
@@ -174,7 +185,7 @@ fun RegistrationScreen(
                                             Toast.makeText(
                                                 context,
                                                 "Something went wrong, please try again.",
-                                                Toast.LENGTH_SHORT
+                                                Toast.LENGTH_SHORT,
                                             ).show()
                                         }
                                     }
@@ -182,12 +193,12 @@ fun RegistrationScreen(
                                 Toast.makeText(
                                     context,
                                     "Something went wrong, please try again.",
-                                    Toast.LENGTH_SHORT
+                                    Toast.LENGTH_SHORT,
                                 ).show()
                             }
                         }
                     }
-                }
+                },
             )
 
             Spacer(modifier = Modifier.padding(10.dp))
@@ -213,7 +224,7 @@ fun RegistrationScreen(
                                 "section" to registrationViewModel.section,
                                 "sem" to registrationViewModel.sem,
                                 "branch" to registrationViewModel.getDepartment(),
-                                "batch" to registrationViewModel.batch
+                                "batch" to registrationViewModel.batch,
                             )
                             registrationViewModel.addStudentToDb(student)?.addOnCompleteListener {
                                 if (it.isSuccessful) {
@@ -222,7 +233,7 @@ fun RegistrationScreen(
                                     Toast.makeText(
                                         context,
                                         "Something went wrong, please try again.",
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
                                     ).show()
                                 }
                             }
@@ -231,7 +242,7 @@ fun RegistrationScreen(
                             Toast.makeText(
                                 context,
                                 "Something went wrong, please try again.",
-                                Toast.LENGTH_SHORT
+                                Toast.LENGTH_SHORT,
                             ).show()
                         }
                     }
@@ -239,15 +250,15 @@ fun RegistrationScreen(
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
                     "Have an account? Login",
                     style = TextStyle(
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Normal,
-                        color = Purple700
-                    )
+                        color = Purple700,
+                    ),
                 )
                 IconButton(onClick = {
                     navController.navigate(Screens.LoginScreen.route)
@@ -255,7 +266,7 @@ fun RegistrationScreen(
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
                         contentDescription = "Next Button",
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(16.dp),
                     )
                 }
             }
