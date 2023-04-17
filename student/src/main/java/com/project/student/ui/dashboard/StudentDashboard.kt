@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.project.navigator.ComposeNavigator
 import com.project.student.localdata.DashboardNavData
 import com.project.student.ui.HomeScreen
@@ -27,12 +28,19 @@ fun StudentDashboard(
     val screens by studentDashboardViewModel.screen.collectAsState()
     val screen by screens.collectAsState(initial = "Home")
 
+    val _student by studentDashboardViewModel.student.collectAsState()
+    val student by _student.collectAsState(initial = null)
+
+    val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    val email = auth.currentUser?.email.toString()
+    studentDashboardViewModel.getStudent(email)
+
     ScaffoldComponent(
         modifier = Modifier,
         topBar = {
             TopAppBarComponent(
                 modifier = Modifier,
-                title = "Hi, Neha!"
+                title = if (student != null) "Hi, ${student?.name}!" else "Hi!"
             )
         },
         content = {
