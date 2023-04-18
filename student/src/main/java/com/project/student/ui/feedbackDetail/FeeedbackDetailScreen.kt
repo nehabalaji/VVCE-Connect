@@ -34,9 +34,6 @@ fun FeedbackDetailScreen(
     LaunchedEffect(key1 = true) {
         viewModel.getQuestions(subjectCode)
     }
-
-    Log.v("studentData", "$questionsListItems")
-
     LazyColumn {
         item {
             Card(
@@ -69,7 +66,7 @@ fun FeedbackDetailScreen(
         }
         item {
             ButtonComponent(text = "Submit", onClick = {
-                viewModel.onSubmitClicked()
+                viewModel.onSubmitClicked(subjectCode)
             })
         }
     }

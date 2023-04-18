@@ -25,19 +25,22 @@ class FeedbackDetailViewModel @Inject constructor(
     private val _questionsList = MutableStateFlow<Flow<List<FeedbackQuestion>>>(emptyFlow())
     val questionsList = _questionsList.asStateFlow()
 
-    private val _feedbackCourseList = MutableStateFlow<Flow<Feedback>>(emptyFlow())
+    private val _studentSubjectsList =
+        MutableStateFlow<Flow<List<Map<String, String>>>>(emptyFlow())
 
     fun getQuestions(subjectCode: String) {
         val email = auth.currentUser?.email
         viewModelScope.launch(Dispatchers.IO) {
             val student = email?.let { getStudentUseCase(it) }
             if (student != null) {
-                val docRef = db.collection("feedback").document("CS").collection(student.sem).document(student.section.uppercase())
+                val docRef = db.collection("feedback").document("CS").collection(student.sem)
+                    .document(student.section.uppercase())
                 docRef.get()
                     .addOnSuccessListener { document ->
                         if (document != null) {
                             try {
-                                val studentSubjects = document.data?.get("subjects") as List<Map<String, String>>
+                                val studentSubjects =
+                                    document.data?.get("subjects") as List<Map<String, String>>
                                 val feedbackList = mutableListOf<Feedback>()
                                 studentSubjects.forEach {
                                     feedbackList.add(
@@ -50,16 +53,16 @@ class FeedbackDetailViewModel @Inject constructor(
                                     )
                                 }
 
+                                Log.v("updated", "${document.data?.get("subjects")}")
+
+                                _studentSubjectsList.value = flow {
+                                    emit(studentSubjects)
+                                }
+
                                 val questionsList = mutableListOf<FeedbackQuestion>()
 
                                 val feedbackCourse = feedbackList.find {
                                     it.subjectCode == subjectCode
-                                }
-
-                                _feedbackCourseList.value = flow {
-                                    if (feedbackCourse != null) {
-                                        emit(feedbackCourse)
-                                    }
                                 }
 
                                 feedbackCourse?.questions?.forEach {
@@ -101,34 +104,68 @@ class FeedbackDetailViewModel @Inject constructor(
         }
     }
 
-    fun onSubmitClicked() {
+    fun onSubmitClicked(subjectCode: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val email = auth.currentUser?.email
             val student = email?.let { getStudentUseCase(it) }
 
-            if (student != null && auth.currentUser != null) {
-                // val docRef = db.collection("feedback").document(student.branch)
-                val currentFeedback = _feedbackCourseList.value.first()
+            try {
+                if (student != null && auth.currentUser != null) {
+                    val currentUserUid = auth.currentUser!!.uid
+                    val updatedCourseFeedback = mutableListOf<Any>()
+                    _studentSubjectsList.value.first().forEachIndexed { index, it ->
+                        if (it["subject_code"] == subjectCode) {
+                            val feedbackGivenUidList = it["feedback_given_uid"] as List<String>
+                            val questions = it["questions"] as List<Map<String, Map<String, String>>>
 
-                val updatedFeedbackUidList = mutableListOf<String>()
-                updatedFeedbackUidList.addAll(currentFeedback.feedbackGivenUid)
-                updatedFeedbackUidList.add(auth.currentUser!!.uid)
+                            val updatedFeedbackGivenUidList = mutableListOf<String>()
 
-                val currentQuestions = _questionsList.value.first()
+                            if (!feedbackGivenUidList.contains(currentUserUid)) {
+                                updatedFeedbackGivenUidList.addAll(feedbackGivenUidList)
+                                updatedFeedbackGivenUidList.add(currentUserUid)
+                            }
 
-                currentQuestions.forEach { feedbackQuestion ->
+                            val currentList = _questionsList.value.first()
+                            val updatedFeedbackList = mutableListOf<HashMap<String, HashMap<String, List<String>>>>()
 
-                    val currentAnswersList = mutableListOf<String>()
-                    val answerMap: HashMap<String, List<String>> = hashMapOf()
+                            questions.forEach { map ->
+                                val updatedAnswersMap = hashMapOf<String, List<String>>()
+                                val updatedFeedbackMap = hashMapOf<String, HashMap<String, List<String>>>()
+                                currentList.forEach { question ->
+                                    if (map.containsKey(question.question)) {
+                                        val updatedAnswersList = mutableListOf<String>()
+                                        val answers = map[question.question] as Map<String, String>
+                                        val answersList = answers["answers"] as List<String>
 
-                    currentFeedback.questions.forEach {
-                        if (it.keys.first() == feedbackQuestion.question) {
-                            currentAnswersList.addAll(it.values)
-                            currentAnswersList.add(feedbackQuestion.rating)
-                            Log.v("studentdata", "$currentAnswersList")
+                                        updatedAnswersList.addAll(answersList)
+                                        updatedAnswersList.add(question.rating)
+                                        updatedAnswersMap["answers"] = updatedAnswersList
+                                        updatedFeedbackMap[question.question] = updatedAnswersMap
+                                        updatedFeedbackList.add(updatedFeedbackMap)
+                                    }
+                                }
+                            }
+
+                            val feedbackObject = hashMapOf(
+                                "feedback_given_uid" to updatedFeedbackGivenUidList,
+                                "questions" to updatedFeedbackList,
+                                "subject_code" to subjectCode,
+                                "subject_title" to it["subject_title"],
+                            )
+                            updatedCourseFeedback.add(index, feedbackObject)
+                        } else {
+                            updatedCourseFeedback.add(it)
                         }
                     }
+                    val docRef = db.collection("feedback").document("CS").collection(student.sem).document(student.section.uppercase())
+                    docRef.set(
+                        hashMapOf(
+                            "subjects" to updatedCourseFeedback,
+                        ),
+                    )
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

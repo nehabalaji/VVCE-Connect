@@ -1,6 +1,5 @@
 package com.project.student.ui.feedback
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -41,10 +40,11 @@ class FeedbackViewModel @Inject constructor(
     }
 
     private fun getStudentFeedbackQuestions(student: Student) {
+        val currentUser = auth.currentUser
         val docRef = db.collection("feedback").document("CS").collection(student.sem).document(student.section.uppercase())
         docRef.get()
             .addOnSuccessListener { document ->
-                if (document != null) {
+                if (document != null && currentUser != null) {
                     try {
                         val studentSubjects = document.data?.get("subjects") as List<Map<String, String>>
                         val feedbackList = mutableListOf<Feedback>()
@@ -59,7 +59,7 @@ class FeedbackViewModel @Inject constructor(
                             )
                         }
                         val pendingFeedbackList = feedbackList.filter {
-                            !it.feedbackGivenUid.contains(student.emailId)
+                            !it.feedbackGivenUid.contains(currentUser.uid)
                         }
 
                         _courseList.value = flow {
