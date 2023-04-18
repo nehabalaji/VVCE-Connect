@@ -1,4 +1,8 @@
 package com.project.student.ui.examForm
 
-class ExamFormScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun ExamFormScreen() {
+
 }

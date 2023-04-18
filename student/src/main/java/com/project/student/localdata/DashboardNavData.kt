@@ -9,19 +9,23 @@ object DashboardNavData {
         return listOf(
             DashboardNavDetails(
                 name = "Home",
-                icon = Icons.Filled.Home
+                icon = Icons.Filled.Home,
+                screen = "Home"
             ),
             DashboardNavDetails(
                 name = "Notification",
-                icon = Icons.Filled.Notifications
+                icon = Icons.Filled.Notifications,
+                screen = "Notification"
             ),
             DashboardNavDetails(
-                name = "Setting",
-                icon = Icons.Filled.Settings
+                name = "About Us",
+                icon = Icons.Filled.Info,
+                screen = "About Us"
             ),
             DashboardNavDetails(
                 name = "Profile",
-                icon = Icons.Filled.Person
+                icon = Icons.Filled.Person,
+                screen = "Profile"
             )
         )
     }
@@ -36,7 +40,7 @@ object DashboardNavData {
             DashboardNavDetails(
                 name = "Performance Report",
                 icon = Icons.Filled.ChromeReaderMode,
-                screen = Screens.StudentPerformanceReport.route
+                screen = Screens.StudentPerformanceReport.name
             ),
             DashboardNavDetails(
                 name = "Course Work",
@@ -59,15 +63,15 @@ object DashboardNavData {
                 screen = Screens.StudentExamForm.route
             ),
             DashboardNavDetails(
-                name = "Exam Fee",
-                icon = Icons.Filled.Payments,
-                screen = Screens.StudentExamFee.route
-            ),
-            DashboardNavDetails(
                 name = "Feedback",
                 icon = Icons.Filled.RateReview,
                 screen = Screens.StudentFeedback.route
             )
+//            DashboardNavDetails(
+//                name = "Settings",
+//                icon = Icons.Filled.Settings,
+//                screen = Screens.Settings.route
+//            )
         )
     }
 

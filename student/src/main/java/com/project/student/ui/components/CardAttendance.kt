@@ -28,7 +28,7 @@ fun CardAttendance(modifier: Modifier, type: String, attendance: String, color: 
         Column() {
             TextComponent(text = type, modifier = Modifier, style = TextStyle(fontSize = 36.sp, textAlign = TextAlign.Center))
             Spacer(modifier = modifier.padding(24.dp))
-            TextComponent(text = attendance, modifier = Modifier, style = TextStyle(fontSize = 48.sp, color = Color.White))
+            TextComponent(text = attendance, modifier = Modifier, style = TextStyle(fontSize = 40.sp, color = Color.White))
         }
     }
 }
