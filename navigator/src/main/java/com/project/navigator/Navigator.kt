@@ -45,13 +45,10 @@ abstract class ComposeNavigator : Navigator() {
             NavigationCommand.NavigateUp -> navigateUp()
             is ComposeNavigationCommand.PopUpToRoute -> popBackStack(
                 navigationCommand.route,
-                navigationCommand.inclusive
+                navigationCommand.inclusive,
             )
             is ComposeNavigationCommand.NavigateUpWithResult<*> -> {
                 navUpWithResult(navigationCommand)
-            }
-            else -> {
-                throw RuntimeException("can't handle this with ComposeNavigator")
             }
         }
     }

@@ -27,11 +27,11 @@ fun SplashScreen(composeNavigator: ComposeNavigator) {
         scale.animateTo(
             targetValue = 0.6f,
             animationSpec = tween(
-                durationMillis = 800
-            )
+                durationMillis = 800,
+            ),
         )
         delay(1000)
-        composeNavigator.navigate(Screens.RegistrationScreen.route) {
+        composeNavigator.navigate(Screens.LoginScreen.route) {
             popUpTo(Screens.VvceConnectSplashScreen.route) {
                 inclusive = true
             }
@@ -41,14 +41,8 @@ fun SplashScreen(composeNavigator: ComposeNavigator) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "Logo")
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun SplashScreenPreview() {
-//    SplashScreen()
-//}

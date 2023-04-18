@@ -8,16 +8,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-
 @Composable
-fun ButtonComponent(text:String) {
+fun ButtonComponent(text: String, onClick: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth(0.78f),
-        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
     ) {
         Text(
             text = text,
@@ -25,10 +23,4 @@ fun ButtonComponent(text:String) {
                 .padding(vertical = 16.dp),
         )
     }
-}
-
-@Preview
-@Composable
-fun ButtonComponentPreview() {
-    ButtonComponent(text = "Sign Up")
 }

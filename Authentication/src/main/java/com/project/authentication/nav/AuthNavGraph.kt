@@ -14,7 +14,7 @@ import com.project.navigator.Screens
 fun NavGraphBuilder.authNavGraph(composeNavigator: ComposeNavigator, context: Context) {
     navigation(
         startDestination = Screens.VvceConnectSplashScreen.name,
-        route = Routes.Auth.name
+        route = Routes.Auth.name,
     ) {
         composable(Screens.VvceConnectSplashScreen.name) {
             SplashScreen(composeNavigator)
@@ -26,12 +26,12 @@ fun NavGraphBuilder.authNavGraph(composeNavigator: ComposeNavigator, context: Co
             RegistrationScreen(composeNavigator, context)
         }
         composable(
-            Screens.EmailVerificationScreen.name
+            Screens.EmailVerificationScreen.name,
         ) {
             EmailVerificationScreen(
                 composeNavigator,
                 studentId = it.arguments?.getString("user_id").toString(),
-                context
+                context,
             )
         }
     }

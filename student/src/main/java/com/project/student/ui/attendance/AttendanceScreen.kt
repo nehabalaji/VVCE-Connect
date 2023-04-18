@@ -26,7 +26,7 @@ fun AttendanceScreen(
     val courseList by viewModel.courseList.collectAsState()
     val courseListItems by courseList.collectAsState(initial = emptyList())
 
-    LazyColumn() {
+    LazyColumn {
         item {
             Card(
                 modifier = Modifier
@@ -36,8 +36,8 @@ fun AttendanceScreen(
                     topStart = 0.dp,
                     topEnd = 0.dp,
                     bottomStart = 40.dp,
-                    bottomEnd = 40.dp
-                )
+                    bottomEnd = 40.dp,
+                ),
             ) {
                 Text(text = "Attendance")
             }
