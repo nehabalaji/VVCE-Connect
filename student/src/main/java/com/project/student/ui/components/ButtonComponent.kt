@@ -16,13 +16,15 @@ import androidx.compose.ui.unit.dp
 fun ButtonComponent(text:String) {
     Button(
         onClick = { /*TODO*/ },
-        modifier = Modifier.fillMaxWidth(0.78f),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp,end = 8.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
     ) {
         Text(
             text = text,
             modifier = Modifier
-                .padding(vertical = 16.dp),
+                .padding(vertical = 8.dp),
         )
     }
 }
