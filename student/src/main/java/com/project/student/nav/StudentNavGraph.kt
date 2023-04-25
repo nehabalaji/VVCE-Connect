@@ -8,12 +8,13 @@ import com.project.navigator.ComposeNavigator
 import com.project.navigator.Routes
 import com.project.navigator.Screens
 import com.project.student.ui.attendance.AttendanceScreen
-import com.project.student.ui.attendanceeDetail.AttendanceDetail
+import com.project.student.ui.attendanceDetail.AttendanceDetail
 import com.project.student.ui.courseWork.CourseWorkDetails
 import com.project.student.ui.courseWork.CourseWorkScreen
 import com.project.student.ui.dashboard.StudentDashboard
 import com.project.student.ui.examForm.ExamFormScreen
 import com.project.student.ui.feedback.FeedbackScreen
+import com.project.student.ui.feedbackDetail.FeedbackDetailScreen
 import com.project.student.ui.performanceReport.PerformanceReportDetailScreen
 import com.project.student.ui.performanceReport.PerformanceReportScreen
 import com.project.student.ui.placements.PlacementsScreen
@@ -23,7 +24,7 @@ import com.project.student.ui.timetable.TimetableScreen
 fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context: Context) {
     navigation(
         startDestination = Screens.StudentDashboardScreen.route,
-        route = Routes.OnBoarding.name
+        route = Routes.OnBoarding.name,
     ) {
         composable(Screens.StudentDashboardScreen.name) {
             StudentDashboard(composeNavigator, context)
@@ -68,7 +69,11 @@ fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context:
             SettingsScreen()
         }
         composable(Screens.StudentFeedback.name) {
-            FeedbackScreen()
+            FeedbackScreen(composeNavigator = composeNavigator)
+        }
+        composable(Screens.StudentFeedbackDetail.name) {
+            val subjectCode = it.arguments?.getString("subject_code") ?: ""
+            FeedbackDetailScreen(composeNavigator = composeNavigator, subjectCode = subjectCode)
         }
     }
 }

@@ -29,8 +29,8 @@ fun SplashScreen(composeNavigator: ComposeNavigator) {
         scale.animateTo(
             targetValue = 0.6f,
             animationSpec = tween(
-                durationMillis = 800
-            )
+                durationMillis = 800,
+            ),
         )
         delay(1000)
         val screen = if (auth.currentUser == null) {
@@ -48,7 +48,7 @@ fun SplashScreen(composeNavigator: ComposeNavigator) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         ImageComponent(painter = painterResource(id = R.drawable.vvce_logo), content = "Logo")
     }

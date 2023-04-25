@@ -135,7 +135,6 @@ class RegistrationViewModel @Inject constructor(
 
     fun getDepartment(): String {
         val department = usn.substring(6, 7)
-        Log.v("DEPARTMENT", department)
         return department.uppercase()
     }
 }
