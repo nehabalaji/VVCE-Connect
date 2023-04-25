@@ -1,5 +1,6 @@
 package com.project.student.ui.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -13,12 +14,14 @@ import androidx.compose.ui.unit.dp
 fun TextFieldComponent(
     label: String,
     modifier: Modifier = Modifier
-        .padding(horizontal = 8.dp, vertical = 4.dp)
 ) {
     var text by rememberSaveable() {
         mutableStateOf("")
     }
     OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, end = 8.dp),
         value = text,
         onValueChange = { text = it },
         label = { Text(label) },
