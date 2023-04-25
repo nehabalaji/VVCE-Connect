@@ -6,7 +6,7 @@ import androidx.navigation.navArgument
 
 sealed class Screens(
     val route: String,
-    val navArguments: List<NamedNavArgument> = emptyList()
+    val navArguments: List<NamedNavArgument> = emptyList(),
 ) {
     val name: String = route.appendArguments(navArguments)
 
@@ -22,9 +22,10 @@ sealed class Screens(
         listOf(
             navArgument("user_id") {
                 type = NavType.StringType
-            }
-        )
+            },
+        ),
     )
+
     object StudentDashboardScreen : Screens("studentDashboard")
 
     object StudentAttendance : Screens("studentAttendance")
@@ -65,8 +66,8 @@ sealed class Screens(
         listOf(
             navArgument("subject_id") {
                 type = NavType.StringType
-            }
-        )
+            },
+        ),
     )
 
     object StudentTimeTable : Screens("studentTimeTable")
@@ -75,9 +76,20 @@ sealed class Screens(
 
     object StudentExamForm : Screens("studentExamForm")
 
-    object StudentExamFee : Screens("studentExamFee")
+    object Settings : Screens("settings")
+
+    object AboutUs : Screens("aboutUs")
 
     object StudentFeedback : Screens("studentFeedback")
+
+    object StudentFeedbackDetail : Screens(
+        "studentFeedbackDetail",
+        listOf(
+            navArgument("subject_code") {
+                type = NavType.StringType
+            },
+        ),
+    )
 }
 
 sealed class Routes(val name: String) {

@@ -1,4 +1,4 @@
-package com.project.student.ui.attendanceeDetail
+package com.project.student.ui.attendanceDetail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
