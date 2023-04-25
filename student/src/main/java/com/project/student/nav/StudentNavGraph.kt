@@ -73,7 +73,7 @@ fun NavGraphBuilder.studentNavGraph(composeNavigator: ComposeNavigator, context:
         }
         composable(Screens.StudentFeedbackDetail.name) {
             val subjectCode = it.arguments?.getString("subject_code") ?: ""
-            FeedbackDetailScreen(composeNavigator = composeNavigator, subjectCode = subjectCode)
+            FeedbackDetailScreen(composeNavigator = composeNavigator, subjectCode = subjectCode, context = context)
         }
     }
 }

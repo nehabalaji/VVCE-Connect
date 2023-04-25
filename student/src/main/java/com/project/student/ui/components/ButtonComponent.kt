@@ -14,7 +14,9 @@ import androidx.compose.ui.unit.dp
 fun ButtonComponent(text: String, onClick: () -> Unit = {}) {
     Button(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(
+            horizontal = 8.dp
+        ),
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
     ) {
         Text(
