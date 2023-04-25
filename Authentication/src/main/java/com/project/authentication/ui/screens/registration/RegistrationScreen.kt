@@ -2,15 +2,11 @@ package com.project.authentication.ui.screens.registration
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -28,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.project.authentication.ui.components.ButtonComponent
 import com.project.authentication.ui.components.PasswordFieldComponent
@@ -239,7 +234,10 @@ fun RegistrationScreen(
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.clickable {
+                    navController.navigateAndClearBackStack(Screens.LoginScreen.route)
+                }.padding(8.dp)
             ) {
                 Text(
                     "Have an account? Login",
@@ -249,15 +247,12 @@ fun RegistrationScreen(
                         color = Purple700
                     )
                 )
-                IconButton(onClick = {
-                    navController.navigate(Screens.LoginScreen.route)
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowForward,
-                        contentDescription = "Next Button",
-                        modifier = Modifier.size(16.dp)
-                    )
-                }
+
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = "Next Button",
+                    modifier = Modifier.size(16.dp)
+                )
             }
         }
     }

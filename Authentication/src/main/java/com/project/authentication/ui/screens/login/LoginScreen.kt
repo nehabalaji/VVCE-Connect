@@ -5,10 +5,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,11 +22,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.Authentication.R
 import com.project.authentication.ui.components.*
 import com.project.authentication.ui.screens.login.viewmodel.LoginViewModel
 import com.project.authentication.ui.theme.Purple500
+import com.project.authentication.ui.theme.Purple700
 import com.project.domain.models.Student
 import com.project.navigator.ComposeNavigator
 import com.project.navigator.Screens
@@ -47,7 +51,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom=16.dp),
+            .padding(bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -71,9 +75,9 @@ fun LoginScreen(
                     .padding(10.dp)
             )
         }
-        Spacer(modifier = Modifier.padding(64.dp))
+        Spacer(modifier = Modifier.padding(16.dp))
         TextComponent(text = "Login", modifier = Modifier, style = TextStyle(fontSize = MaterialTheme.typography.h3.fontSize, fontWeight = FontWeight.Bold))
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(12.dp))
         TextFieldComponent(label = "Username", onValueChanged = {
             loginViewModel.setEmail(it)
         }, error = emailError.value, errorMessage = "Enter a valid college email id")
@@ -128,7 +132,7 @@ fun LoginScreen(
                 }
             }
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(16.dp))
         ButtonComponent(text = "Login", onClick = {
             emailError.value = !loginViewModel.validateEmailId()
             passwordError.value = !loginViewModel.validatePassword()
@@ -171,5 +175,26 @@ fun LoginScreen(
                 }
             }
         })
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.clickable {
+                composeNavigator.navigate(Screens.RegistrationScreen.route)
+            }.padding(16.dp)
+        ) {
+            Text(
+                "Don't have an account? Register here",
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Purple700
+                )
+            )
+            Icon(
+                imageVector = Icons.Default.ArrowForward,
+                contentDescription = "Next Button",
+                modifier = Modifier.size(16.dp)
+            )
+        }
     }
 }
