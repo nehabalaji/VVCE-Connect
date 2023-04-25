@@ -47,7 +47,9 @@ fun StudentDashboard(
             when (screen) {
                 "Home" -> HomeScreen(composeNavigator)
                 "Notification" -> NotificationScreen()
-                "Profile" -> StudentProfileScreen()
+                "Profile" -> StudentProfileScreen(
+                    composeNavigator
+                )
             }
         },
         bottomBar = {

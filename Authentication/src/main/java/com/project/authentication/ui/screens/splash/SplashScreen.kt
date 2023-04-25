@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import com.google.firebase.auth.FirebaseAuth
 import com.project.Authentication.R
 import com.project.authentication.ui.components.ImageComponent
 import com.project.navigator.ComposeNavigator
@@ -20,6 +21,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(composeNavigator: ComposeNavigator) {
+    val auth: FirebaseAuth = FirebaseAuth.getInstance()
     val scale = remember {
         Animatable(0f)
     }
@@ -31,7 +33,12 @@ fun SplashScreen(composeNavigator: ComposeNavigator) {
             ),
         )
         delay(1000)
-        composeNavigator.navigate(Screens.LoginScreen.route) {
+        val screen = if (auth.currentUser == null) {
+            Screens.LoginScreen.route
+        } else {
+            Screens.StudentDashboardScreen.route
+        }
+        composeNavigator.navigate(screen) {
             popUpTo(Screens.VvceConnectSplashScreen.route) {
                 inclusive = true
             }

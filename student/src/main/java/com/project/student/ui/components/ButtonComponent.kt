@@ -11,16 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ButtonComponent(text: String, onClick: () -> Unit) {
+fun ButtonComponent(text: String, onClick: () -> Unit = {}) {
     Button(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth(0.78f),
-        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
     ) {
         Text(
             text = text,
             modifier = Modifier
-                .padding(vertical = 16.dp),
+                .padding(vertical = 4.dp, horizontal = 8.dp)
         )
     }
 }

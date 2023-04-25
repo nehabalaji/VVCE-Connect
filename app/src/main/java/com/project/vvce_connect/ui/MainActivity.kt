@@ -10,10 +10,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.project.student.nav.studentNavGraph
 import com.project.authentication.nav.authNavGraph
 import com.project.navigator.ComposeNavigator
 import com.project.navigator.Routes
+import com.project.student.nav.studentNavGraph
 import com.project.vvce_connect.ui.theme.VVCEConnectTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
