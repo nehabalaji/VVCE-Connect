@@ -8,7 +8,7 @@ import com.project.domain.repository.StudentRepository
 import javax.inject.Inject
 
 class StudentRepositoryImpl @Inject constructor(
-    private val dao: Dao
+    private val dao: Dao,
 ) : StudentRepository {
 
     override fun getStudent(email: String): Student? {
