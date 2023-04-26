@@ -7,11 +7,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.project.domain.models.Attendance
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +20,9 @@ class AttendanceViewModel @Inject constructor() : ViewModel() {
     private val _courseList = MutableStateFlow<Flow<List<Attendance>>>(emptyFlow())
     val courseList = _courseList.asStateFlow()
 
+    private val _loading = MutableStateFlow<Flow<Boolean>>(emptyFlow())
+    val loading = _loading.asStateFlow()
+
     init {
         auth.currentUser?.email?.let {
             getStudentCourses(it)
@@ -31,6 +30,7 @@ class AttendanceViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun getStudentCourses(email: String) {
+        _loading.value = flowOf(true)
         val docRef = db.collection("student").document(email)
         docRef.get()
             .addOnSuccessListener { document ->
@@ -54,12 +54,15 @@ class AttendanceViewModel @Inject constructor() : ViewModel() {
                                 _courseList.value = flow {
                                     emit(attendanceList)
                                 }
+                                _loading.value = flowOf(false)
                             }
                         }
                     } catch (e: Exception) {
+                        _loading.value = flowOf(false)
                         e.printStackTrace()
                     }
                 } else {
+                    _loading.value = flowOf(false)
                     Log.d(TAG, "No such document")
                 }
             }

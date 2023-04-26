@@ -48,6 +48,9 @@ fun LoginScreen(
     val passwordError = remember {
         mutableStateOf(false)
     }
+    val loading = remember {
+        mutableStateOf(false)
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -75,6 +78,9 @@ fun LoginScreen(
                     .padding(10.dp)
             )
         }
+        if (loading.value) {
+            LinearProgressIndicator(color = Purple700)
+        }
         Spacer(modifier = Modifier.padding(16.dp))
         TextComponent(text = "Login", modifier = Modifier, style = TextStyle(fontSize = MaterialTheme.typography.h3.fontSize, fontWeight = FontWeight.Bold))
         Spacer(modifier = Modifier.padding(12.dp))
@@ -92,6 +98,7 @@ fun LoginScreen(
             onActionDone = {
                 emailError.value = !loginViewModel.validateEmailId()
                 passwordError.value = !loginViewModel.validatePassword()
+                loading.value = true
                 loginViewModel.loginUser().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         coroutineScope.launch(Dispatchers.IO) {
@@ -127,6 +134,7 @@ fun LoginScreen(
                             }
                         }
                     } else {
+                        loading.value = false
                         Toast.makeText(context, "Please check your credentials", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -136,6 +144,7 @@ fun LoginScreen(
         ButtonComponent(text = "Login", onClick = {
             emailError.value = !loginViewModel.validateEmailId()
             passwordError.value = !loginViewModel.validatePassword()
+            loading.value = true
             loginViewModel.loginUser().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     coroutineScope.launch(Dispatchers.IO) {
@@ -171,6 +180,7 @@ fun LoginScreen(
                         }
                     }
                 } else {
+                    loading.value = false
                     Toast.makeText(context, "Please check your credentials", Toast.LENGTH_SHORT).show()
                 }
             }

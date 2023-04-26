@@ -24,7 +24,7 @@ fun FeaturesGridComponent(
     LazyVerticalGrid(
         modifier = Modifier.background(Color.White),
         columns = GridCells.Fixed(gridSize),
-        contentPadding = PaddingValues(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 56.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 64.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         content = {

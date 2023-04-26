@@ -14,6 +14,9 @@ class PerformanceReportViewModel @Inject constructor() : ViewModel() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
 
+    private val _loading = MutableStateFlow<Flow<Boolean>>(emptyFlow())
+    val loading = _loading.asStateFlow()
+
     private val _ia1Marks = MutableStateFlow<Flow<String>>(emptyFlow())
     val ia1Marks = _ia1Marks.asStateFlow()
 
@@ -33,6 +36,7 @@ class PerformanceReportViewModel @Inject constructor() : ViewModel() {
 
     init {
         auth.currentUser?.email?.let {
+            _loading.value = flowOf(true)
             db.collection("student").document()
             val docRef = db.collection("student").document(it).get()
             docRef.addOnCompleteListener { task ->
@@ -42,7 +46,9 @@ class PerformanceReportViewModel @Inject constructor() : ViewModel() {
                         subjectList.add(subject["subject_title"].toString())
                     }
                     _subjects.value = flow { emit(subjectList) }
+                    _loading.value = flowOf(false)
                 } else {
+                    _loading.value = flowOf(false)
                     Log.d("TAG", "Error getting documents: ", task.exception)
                 }
             }

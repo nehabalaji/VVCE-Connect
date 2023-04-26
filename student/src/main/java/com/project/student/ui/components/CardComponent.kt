@@ -21,7 +21,7 @@ import com.project.student.ui.theme.Purple700
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CardComponent(
-    modifier: Modifier = Modifier.padding(vertical = 10.dp),
+    modifier: Modifier = Modifier.padding(vertical = 8.dp),
     icon: ImageVector,
     name: String,
     onClick: () -> Unit = {}
@@ -50,7 +50,7 @@ fun CardComponent(
             Text(
                 text = name,
                 textAlign = TextAlign.Center,
-                fontSize = 24.sp
+                fontSize = 22.sp
             )
         }
     }

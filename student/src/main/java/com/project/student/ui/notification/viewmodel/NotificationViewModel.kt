@@ -22,6 +22,9 @@ class NotificationViewModel @Inject constructor(
     private val _notificationList = MutableStateFlow<Flow<List<Notification>>>(emptyFlow())
     val notificationList = _notificationList.asStateFlow()
 
+    private val _loading = MutableStateFlow<Flow<Boolean>>(emptyFlow())
+    val loading = _loading.asStateFlow()
+
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
 
@@ -36,6 +39,7 @@ class NotificationViewModel @Inject constructor(
     }
 
     private fun getNotificationList(email: String) = viewModelScope.launch(Dispatchers.IO){
+        _loading.value = flowOf(true)
         val student = getStudentUseCase(email)
         db.collection("announcements").document(student?.branch.toString()).collection(student?.sem.toString()).document(student?.section.toString()).get()
             .addOnCompleteListener {
@@ -50,7 +54,9 @@ class NotificationViewModel @Inject constructor(
                     _notificationList.value = flow {
                         emit(announcementList)
                     }
+                    _loading.value = flowOf(false)
                 } else {
+                    _loading.value = flowOf(false)
                     Log.d("TAG", "Error getting documents: ", it.exception)
                 }
             }

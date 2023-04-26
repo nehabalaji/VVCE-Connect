@@ -7,12 +7,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -26,67 +28,81 @@ import com.project.navigator.Screens
 import com.project.student.ui.components.IconButtonComponent
 import com.project.student.ui.performanceReport.viewmodel.PerformanceReportViewModel
 import com.project.student.ui.theme.Purple500
+import com.project.student.ui.theme.Purple700
 
 @Composable
 fun PerformanceReportScreen(
     composeNavigator: ComposeNavigator,
-    performanceReportViewModel: PerformanceReportViewModel = hiltViewModel(),
+    performanceReportViewModel: PerformanceReportViewModel = hiltViewModel()
 ) {
     val courseList by performanceReportViewModel.subjects.collectAsState()
     val courseListItems by courseList.collectAsState(initial = emptyList())
 
-    LazyColumn() {
-        item {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp),
-                shape = RoundedCornerShape(
-                    topStart = 0.dp,
-                    topEnd = 0.dp,
-                    bottomStart = 40.dp,
-                    bottomEnd = 40.dp,
-                ),
-                backgroundColor = Purple500,
-            ) {
-                Text(
-                    text = "Performance report",
-                    modifier = Modifier.padding(20.dp),
-                    style = TextStyle(
-                        fontSize = 36.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        color = Color.Black,
-                    ),
-                )
-            }
-        }
+    val loadingSign by performanceReportViewModel.loading.collectAsState()
+    val loading by loadingSign.collectAsState(initial = false)
 
-        items(courseListItems) {
-            Row(
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth()
-                    .clickable {
-                        composeNavigator.navigate(Screens.StudentPerformanceReportDetails.route.plus("/$it"))
-                    },
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Text(
-                    text = it,
-                    modifier = Modifier.padding(16.dp).weight(0.75f).clickable {
-                        composeNavigator.navigate(Screens.StudentPerformanceReportDetails.route.plus("/$it"))
-                    },
-                    style = TextStyle(fontSize = 24.sp),
-                )
-                IconButtonComponent(icon = Icons.Filled.ArrowForwardIos, content = "Right Arrow")
+    if (loading) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator(color = Purple700)
+        }
+    } else {
+        LazyColumn() {
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp),
+                    shape = RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomStart = 40.dp,
+                        bottomEnd = 40.dp,
+                    ),
+                    backgroundColor = Purple500,
+                ) {
+                    Text(
+                        text = "Performance report",
+                        modifier = Modifier.padding(20.dp),
+                        style = TextStyle(
+                            fontSize = 36.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            color = Color.Black,
+                        ),
+                    )
+                }
             }
-            Spacer(modifier = Modifier
-                .height(2.dp)
-                .fillMaxWidth()
-                .background(color = Color.Black)
-                .padding(2.dp)
-            )
+
+            items(courseListItems) {
+                Row(
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()
+                        .clickable {
+                            composeNavigator.navigate(Screens.StudentPerformanceReportDetails.route.plus("/$it"))
+                        },
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text = it,
+                        modifier = Modifier.padding(16.dp).weight(0.75f).clickable {
+                            composeNavigator.navigate(Screens.StudentPerformanceReportDetails.route.plus("/$it"))
+                        },
+                        style = TextStyle(fontSize = 24.sp),
+                    )
+                    IconButtonComponent(icon = Icons.Filled.ArrowForwardIos, content = "Right Arrow")
+                }
+                Spacer(modifier = Modifier
+                    .height(2.dp)
+                    .fillMaxWidth()
+                    .background(color = Color.Black)
+                    .padding(2.dp)
+                )
+            }
         }
     }
 }

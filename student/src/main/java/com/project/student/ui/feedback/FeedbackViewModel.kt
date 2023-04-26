@@ -24,6 +24,9 @@ class FeedbackViewModel @Inject constructor(
     private val _courseList = MutableStateFlow<Flow<List<Feedback>>>(emptyFlow())
     val courseList = _courseList.asStateFlow()
 
+    private val _loading = MutableStateFlow<Flow<Boolean>>(emptyFlow())
+    val loading = _loading.asStateFlow()
+
     init {
         auth.currentUser?.email?.let {
             getStudentDetails(it)
@@ -40,6 +43,7 @@ class FeedbackViewModel @Inject constructor(
     }
 
     private fun getStudentFeedbackQuestions(student: Student) {
+        _loading.value = flowOf(true)
         val currentUser = auth.currentUser
         val docRef = db.collection("feedback").document("CS").collection(student.sem).document(student.section.uppercase())
         docRef.get()
@@ -65,7 +69,9 @@ class FeedbackViewModel @Inject constructor(
                         _courseList.value = flow {
                             emit(pendingFeedbackList)
                         }
+                        _loading.value = flowOf(false)
                     } catch (e: Exception) {
+                        _loading.value = flowOf(false)
                         e.printStackTrace()
                     }
                 }

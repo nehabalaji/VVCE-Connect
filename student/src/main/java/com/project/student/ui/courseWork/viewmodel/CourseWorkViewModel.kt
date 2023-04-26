@@ -27,6 +27,9 @@ class CourseWorkViewModel @Inject constructor(
     private val _subjectList = MutableStateFlow<Flow<List<String>>>(emptyFlow())
     val subjects = _subjectList.asStateFlow()
 
+    private val _loading = MutableStateFlow<Flow<Boolean>>(emptyFlow())
+    val loading = _loading.asStateFlow()
+
     val subjectList = arrayListOf<String>()
     private val resources = listOf<String>()
 
@@ -39,6 +42,7 @@ class CourseWorkViewModel @Inject constructor(
     }
 
     private fun getResources(email: String) = viewModelScope.launch(Dispatchers.IO) {
+        _loading.value = flowOf(true)
         val student = getStudentUseCase(email)
         val docRef = db.collection("subjects").document(student?.sem.toString()).collection(student?.branch.toString()).get()
         docRef.addOnCompleteListener {
@@ -50,7 +54,9 @@ class CourseWorkViewModel @Inject constructor(
                 _subjectList.value = flow {
                     emit(subjectList)
                 }
+                _loading.value = flowOf(false)
             } else {
+                _loading.value = flowOf(false)
                 Log.d("TAG", "Error getting documents: ", it.exception)
             }
         }

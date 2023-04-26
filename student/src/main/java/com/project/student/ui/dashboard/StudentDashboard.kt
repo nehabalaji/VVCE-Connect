@@ -2,6 +2,7 @@ package com.project.student.ui.dashboard
 
 import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,6 +19,7 @@ import com.project.student.ui.components.TopAppBarComponent
 import com.project.student.ui.dashboard.viewmodel.StudentDashboardViewModel
 import com.project.student.ui.notification.NotificationScreen
 import com.project.student.ui.profile.StudentProfileScreen
+import com.project.student.ui.theme.Purple700
 
 @Composable
 fun StudentDashboard(

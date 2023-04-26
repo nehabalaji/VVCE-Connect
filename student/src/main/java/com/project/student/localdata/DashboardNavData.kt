@@ -13,7 +13,7 @@ object DashboardNavData {
                 screen = "Home"
             ),
             DashboardNavDetails(
-                name = "Notification",
+                name = "Announcements",
                 icon = Icons.Filled.Notifications,
                 screen = "Notification"
             ),
