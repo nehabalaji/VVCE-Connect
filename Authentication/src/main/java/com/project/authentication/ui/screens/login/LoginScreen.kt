@@ -98,6 +98,55 @@ fun LoginScreen(
             onActionDone = {
                 emailError.value = !loginViewModel.validateEmailId()
                 passwordError.value = !loginViewModel.validatePassword()
+                if (!emailError.value && !passwordError.value) {
+                    loading.value = true
+                    loginViewModel.loginUser().addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            coroutineScope.launch(Dispatchers.IO) {
+                                if (loginViewModel.getStudent() == null) {
+                                    loginViewModel.getStudentFromFireStore(loginViewModel.email)
+                                        .addOnCompleteListener {
+                                            if (it.isSuccessful) {
+                                                val usn = it.result.data?.get("usn").toString()
+                                                val name = it.result.data?.get("name").toString()
+                                                val phone = it.result.data?.get("phone").toString()
+                                                val yearOfJoining =
+                                                    it.result.data?.get("year_of_joining").toString()
+                                                val sem = it.result.data?.get("sem").toString()
+                                                val branch = it.result.data?.get("branch").toString()
+                                                val section = it.result.data?.get("section").toString()
+                                                val student = Student(
+                                                    name,
+                                                    phone,
+                                                    usn,
+                                                    loginViewModel.email,
+                                                    yearOfJoining,
+                                                    sem,
+                                                    branch,
+                                                    section
+                                                )
+                                                Log.v("STUDENT", student.toString())
+                                                loginViewModel.insertStudent(student)
+                                                composeNavigator.navigate(Screens.StudentDashboardScreen.route)
+                                            }
+                                        }
+                                } else {
+                                    composeNavigator.navigate(Screens.StudentDashboardScreen.route)
+                                }
+                            }
+                        } else {
+                            loading.value = false
+                            Toast.makeText(context, "Please check your credentials", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        )
+        Spacer(modifier = Modifier.padding(16.dp))
+        ButtonComponent(text = "Login", onClick = {
+            emailError.value = !loginViewModel.validateEmailId()
+            passwordError.value = !loginViewModel.validatePassword()
+            if (!emailError.value && !passwordError.value) {
                 loading.value = true
                 loginViewModel.loginUser().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -137,51 +186,6 @@ fun LoginScreen(
                         loading.value = false
                         Toast.makeText(context, "Please check your credentials", Toast.LENGTH_SHORT).show()
                     }
-                }
-            }
-        )
-        Spacer(modifier = Modifier.padding(16.dp))
-        ButtonComponent(text = "Login", onClick = {
-            emailError.value = !loginViewModel.validateEmailId()
-            passwordError.value = !loginViewModel.validatePassword()
-            loading.value = true
-            loginViewModel.loginUser().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    coroutineScope.launch(Dispatchers.IO) {
-                        if (loginViewModel.getStudent() == null) {
-                            loginViewModel.getStudentFromFireStore(loginViewModel.email)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        val usn = it.result.data?.get("usn").toString()
-                                        val name = it.result.data?.get("name").toString()
-                                        val phone = it.result.data?.get("phone").toString()
-                                        val yearOfJoining =
-                                            it.result.data?.get("year_of_joining").toString()
-                                        val sem = it.result.data?.get("sem").toString()
-                                        val branch = it.result.data?.get("branch").toString()
-                                        val section = it.result.data?.get("section").toString()
-                                        val student = Student(
-                                            name,
-                                            phone,
-                                            usn,
-                                            loginViewModel.email,
-                                            yearOfJoining,
-                                            sem,
-                                            branch,
-                                            section
-                                        )
-                                        Log.v("STUDENT", student.toString())
-                                        loginViewModel.insertStudent(student)
-                                        composeNavigator.navigate(Screens.StudentDashboardScreen.route)
-                                    }
-                                }
-                        } else {
-                            composeNavigator.navigate(Screens.StudentDashboardScreen.route)
-                        }
-                    }
-                } else {
-                    loading.value = false
-                    Toast.makeText(context, "Please check your credentials", Toast.LENGTH_SHORT).show()
                 }
             }
         })
