@@ -8,11 +8,11 @@ import com.project.domain.repository.StudentRepository
 import javax.inject.Inject
 
 class StudentRepositoryImpl @Inject constructor(
-    private val dao: Dao
+    private val dao: Dao,
 ) : StudentRepository {
 
-    override fun getStudent(studentUsn: String): Student {
-        return dao.getStudent(studentUsn).toStudent()
+    override fun getStudent(email: String): Student? {
+        return dao.getStudent(email)?.toStudent()
     }
 
     override suspend fun insertStudent(student: Student) {

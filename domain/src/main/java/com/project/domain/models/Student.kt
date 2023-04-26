@@ -6,6 +6,8 @@ data class Student(
     val usn: String,
     val emailId: String,
     val yearOfJoining: String,
-    val password: String,
-    val role: String = "Student"
+    val sem: String,
+    val branch: String,
+    val section: String,
+    val role: String = "Student",
 )

@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.project.vvce_connect.ui.screens.localdata.DashboardNavData
-import com.project.vvce_connect.ui.screens.localdata.DashboardNavDetails
+import com.project.student.localdata.DashboardNavDetails
 
 @Composable
 fun BottomNavigationBar(

@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.project.student.localdata.DashboardNavDetails
 import com.project.vvce_connect.ui.screens.localdata.DashboardNavData
-import com.project.vvce_connect.ui.screens.localdata.DashboardNavDetails
 
 @Composable
 fun FeaturesGridComponent(

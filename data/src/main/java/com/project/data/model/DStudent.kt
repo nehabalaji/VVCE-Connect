@@ -7,10 +7,12 @@ import androidx.room.PrimaryKey
 data class DStudent(
     val name: String,
     val phone: String,
-    @PrimaryKey(autoGenerate = false)
     val usn: String,
+    @PrimaryKey(autoGenerate = false)
     val emailId: String,
     val yearOfJoining: String,
-    val password: String,
+    val sem: String,
+    val branch: String,
+    val section: String,
     val role: String = "Student"
 )

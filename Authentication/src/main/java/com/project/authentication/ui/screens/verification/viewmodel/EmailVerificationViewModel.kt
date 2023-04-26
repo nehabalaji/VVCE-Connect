@@ -19,7 +19,7 @@ class EmailVerificationViewModel @Inject constructor(
         private set
 
     fun getStudentEmail(usn: String): String {
-        return getStudentUseCase(usn).emailId
+        return getStudentUseCase(usn)?.emailId.toString()
     }
 
     fun verifyEmailAddress(email: String) = user?.sendEmailVerification()

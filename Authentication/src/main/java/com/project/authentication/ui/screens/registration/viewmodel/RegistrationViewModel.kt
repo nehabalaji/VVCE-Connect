@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.project.domain.models.Student
@@ -45,6 +44,15 @@ class RegistrationViewModel @Inject constructor(
     var confirmPassword = mutableStateOf("").value
         private set
 
+    var section = mutableStateOf("").value
+        private set
+
+    var batch = mutableStateOf("").value
+        private set
+
+    var sem = mutableStateOf("").value
+        private set
+
     fun setName(inputString: String) {
         name = inputString
     }
@@ -73,6 +81,18 @@ class RegistrationViewModel @Inject constructor(
         confirmPassword = inputString
     }
 
+    fun setSection(inputString: String) {
+        section = inputString
+    }
+
+    fun setBatch(inputString: String) {
+        batch = inputString
+    }
+
+    fun setSem(inputString: String) {
+        sem = inputString
+    }
+
     fun validateName(): Boolean {
         return name.isNotBlank()
     }
@@ -98,15 +118,23 @@ class RegistrationViewModel @Inject constructor(
     }
 
     fun insertStudent() = viewModelScope.launch {
-        insertStudentUseCase(Student(name, phoneNumber, usn, email, yearOfJoining, password))
+        insertStudentUseCase(Student(name, phoneNumber, usn, email, yearOfJoining, sem, getDepartment(), section))
     }
 
     fun registerStudent(): Task<AuthResult> {
         return auth.createUserWithEmailAndPassword(email, password)
     }
 
-    fun addStudentToDb(student: HashMap<String, String>): Task<DocumentReference> {
-        return db.collection("student")
-            .add(student)
+    fun addStudentToDb(student: HashMap<String, String>): Task<Void>? {
+        return student["email"]?.let {
+            db.collection("student")
+                .document(it)
+                .set(student)
+        }
+    }
+
+    fun getDepartment(): String {
+        val department = usn.substring(6, 7)
+        return department.uppercase()
     }
 }
